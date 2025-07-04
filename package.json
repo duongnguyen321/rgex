@@ -1,6 +1,6 @@
 {
 	"name": "rgex",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "A powerful, chainable regex builder platform with comprehensive validation utilities",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
@@ -41,7 +41,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/duongnguyen321/rgex.git"
+		"url": "git+https://github.com/duongnguyen321/rgex.git"
 	},
 	"bugs": {
 		"url": "https://github.com/duongnguyen321/rgex/issues"

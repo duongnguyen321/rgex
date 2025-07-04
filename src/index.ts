@@ -46,6 +46,14 @@ export {
 	parseHumanTextToRegex,
 	parseHumanTextToValidation,
 	getPatternSuggestions,
+	// Shorter aliases for convenience
+	humanToRegex,
+	humanToValidation,
+	getSuggestions,
+	// Ultra-short aliases
+	h2r,
+	h2v,
+	suggest,
 } from './utils/humanText.js';
 
 export {

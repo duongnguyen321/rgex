@@ -70,6 +70,44 @@ export class RGex {
 		return getPatternSuggestions(text);
 	}
 
+	/**
+	 * Create RGex instance from human text description (Static method)
+	 */
+	static humanText(humanText: string, testValue?: string): RGex {
+		const result = parseHumanTextToRegex(humanText, testValue);
+
+		if (result.success && result.pattern) {
+			return new RGex(result.pattern.source, {
+				global: result.pattern.global,
+				ignoreCase: result.pattern.ignoreCase,
+				multiline: result.pattern.multiline,
+				dotAll: result.pattern.dotAll,
+				unicode: result.pattern.unicode,
+				sticky: result.pattern.sticky,
+			});
+		} else {
+			// Return empty RGex if parsing failed, user can check isValid()
+			return new RGex('(?!.*)', {}); // Pattern that never matches
+		}
+	}
+
+	/**
+	 * Replace current pattern with human text description (Instance method)
+	 */
+	humanText(humanText: string, testValue?: string): RGex {
+		const result = parseHumanTextToRegex(humanText, testValue);
+
+		if (result.success && result.pattern) {
+			this.pattern = result.pattern.source;
+			// Preserve existing flags unless pattern has specific requirements
+			return this;
+		} else {
+			// Set to non-matching pattern if parsing failed
+			this.pattern = '(?!.*)'; // Pattern that never matches
+			return this;
+		}
+	}
+
 	// Builder Methods
 
 	/**
@@ -549,4 +587,28 @@ export class RGex {
 	static normalize(text: string): string {
 		return normalizeText(text);
 	}
+
+	// ============================================
+	// SHORTER STATIC METHOD ALIASES
+	// ============================================
+
+	/**
+	 * Short alias for toRegex
+	 */
+	static h2r = RGex.toRegex;
+
+	/**
+	 * Short alias for toValidate
+	 */
+	static h2v = RGex.toValidate;
+
+	/**
+	 * Short alias for humanText
+	 */
+	static human = RGex.humanText;
+
+	/**
+	 * Short alias for getSuggestions
+	 */
+	static suggest = RGex.getSuggestions;
 }

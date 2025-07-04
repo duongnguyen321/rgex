@@ -1,19 +1,19 @@
 {
 	"name": "rgex",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "A powerful, chainable regex builder platform with comprehensive validation utilities",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
 	"type": "module",
 	"scripts": {
-		"test": "ts-node test/rgex.test.ts",
-		"test:run": "ts-node test/rgex.test.ts",
-		"examples": "ts-node examples/examples.ts",
-		"help": "ts-node scripts/scripts.ts",
-		"dev": "ts-node src/index.ts",
+		"test": "tsx test/rgex.test.ts",
+		"test:run": "tsx test/rgex.test.ts",
+		"examples": "tsx examples/examples.ts",
+		"help": "tsx scripts/scripts.ts",
+		"dev": "tsx src/index.ts",
 		"build": "tsc",
 		"lint": "tsc --noEmit",
-		"start": "ts-node examples/examples.ts",
+		"start": "tsx examples/examples.ts",
 		"postinstall": "node scripts/postinstall.js"
 	},
 	"keywords": [
@@ -32,7 +32,8 @@
 	"author": "duongnguyen321",
 	"license": "MIT",
 	"devDependencies": {
-		"ts-node": "^10.9.1",
+		"@types/node": "^24.0.10",
+		"tsx": "^4.20.3",
 		"typescript": "^5.0.0"
 	},
 	"peerDependencies": {

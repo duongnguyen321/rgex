@@ -219,7 +219,22 @@ export function formatConfidence(confidence: number): string {
  */
 export function isDevelopment(): boolean {
 	try {
-		return process?.env?.NODE_ENV === 'development';
+		// Check Node.js environment
+		if (typeof process !== 'undefined' && process?.env?.NODE_ENV) {
+			return process.env.NODE_ENV === 'development';
+		}
+
+		// Check browser environment variables set by bundlers
+		if (typeof globalThis !== 'undefined') {
+			// Check for common bundler environment variables
+			const global = globalThis as any;
+			if (global.process?.env?.NODE_ENV) {
+				return global.process.env.NODE_ENV === 'development';
+			}
+		}
+
+		// Default to false in unknown environments
+		return false;
 	} catch {
 		return false;
 	}

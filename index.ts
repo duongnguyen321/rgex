@@ -13,11 +13,37 @@ export { default } from './src/index';
 if (typeof globalThis !== 'undefined' && !(globalThis as any).__RGEX_LOADED__) {
 	(globalThis as any).__RGEX_LOADED__ = true;
 
-	// Only show in development or when explicitly requested
-	if (
-		process?.env?.NODE_ENV !== 'production' &&
-		process?.env?.RGEX_WELCOME !== 'false'
-	) {
+	// Check if we should show the welcome message
+	let shouldShowWelcome = false;
+
+	try {
+		// Check Node.js environment
+		if (typeof process !== 'undefined' && process?.env) {
+			shouldShowWelcome =
+				process.env.NODE_ENV !== 'production' &&
+				process.env.RGEX_WELCOME !== 'false';
+		}
+		// Check for bundler-injected environment variables
+		else if (typeof globalThis !== 'undefined') {
+			const global = globalThis as any;
+			if (global.process?.env) {
+				shouldShowWelcome =
+					global.process.env.NODE_ENV !== 'production' &&
+					global.process.env.RGEX_WELCOME !== 'false';
+			} else {
+				// Default to showing in environments without process.env
+				shouldShowWelcome = true;
+			}
+		} else {
+			// Default for other environments
+			shouldShowWelcome = true;
+		}
+	} catch {
+		// If any error occurs, default to showing the message
+		shouldShowWelcome = true;
+	}
+
+	if (shouldShowWelcome) {
 		const welcome = `
 🎉 RGex loaded! Enhanced regex building platform
 🌐 Visit: https://codetails.site for more tools

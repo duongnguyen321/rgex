@@ -1,6 +1,6 @@
 {
 	"name": "rgex",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"description": "A powerful, chainable regex builder platform with comprehensive validation utilities",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
@@ -50,6 +50,7 @@
 		"src/",
 		"types/",
 		"dist/",
+		"scripts/",
 		"README.md",
 		"LICENSE"
 	]

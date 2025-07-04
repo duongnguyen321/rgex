@@ -4,10 +4,10 @@
  */
 
 // Export everything from the main source
-export * from './src/index.ts';
+export * from './src/index';
 
 // Default export for convenience
-export { default } from './src/index.ts';
+export { default } from './src/index';
 
 // Show installation message on first import (only once)
 if (typeof globalThis !== 'undefined' && !(globalThis as any).__RGEX_LOADED__) {

@@ -1,0 +1,56 @@
+{
+	"name": "rgex",
+	"version": "1.0.0",
+	"description": "A powerful, chainable regex builder platform with comprehensive validation utilities",
+	"main": "dist/index.js",
+	"module": "dist/index.js",
+	"type": "module",
+	"scripts": {
+		"test": "ts-node test/rgex.test.ts",
+		"test:run": "ts-node test/rgex.test.ts",
+		"examples": "ts-node examples/examples.ts",
+		"help": "ts-node scripts/scripts.ts",
+		"dev": "ts-node src/index.ts",
+		"build": "tsc",
+		"lint": "tsc --noEmit",
+		"start": "ts-node examples/examples.ts",
+		"postinstall": "node scripts/postinstall.js"
+	},
+	"keywords": [
+		"regex",
+		"regular-expressions",
+		"validation",
+		"typescript",
+		"builder-pattern",
+		"chainable",
+		"email-validation",
+		"url-validation",
+		"pattern-matching",
+		"human-text-parsing",
+		"password-validation"
+	],
+	"author": "duongnguyen321",
+	"license": "MIT",
+	"devDependencies": {
+		"ts-node": "^10.9.1",
+		"typescript": "^5.0.0"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/duongnguyen321/rgex.git"
+	},
+	"bugs": {
+		"url": "https://github.com/duongnguyen321/rgex/issues"
+	},
+	"homepage": "https://github.com/duongnguyen321/rgex#readme",
+	"files": [
+		"src/",
+		"types/",
+		"dist/",
+		"README.md",
+		"LICENSE"
+	]
+}

@@ -50,10 +50,16 @@ export {
 	humanToRegex,
 	humanToValidation,
 	getSuggestions,
+	// Text-based aliases
+	textToRegex,
+	textToValidation,
+	textToSuggestions,
 	// Ultra-short aliases
 	h2r,
 	h2v,
 	suggest,
+	t2r,
+	t2v,
 } from './utils/humanText.js';
 
 export {

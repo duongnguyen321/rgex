@@ -1162,8 +1162,9 @@ export function parseHumanTextToValidation(
 	}
 
 	// Test extracted rules if test value provided
+	let allPassed = true;
+	const caseUnPassed = [];
 	if (testValue && rules.length > 0) {
-		let allPassed = true;
 		for (const rule of rules) {
 			let passed = true;
 
@@ -1175,6 +1176,7 @@ export function parseHumanTextToValidation(
 
 			if (!passed) {
 				allPassed = false;
+				caseUnPassed.push(rule.name);
 				suggestions.push(
 					`Test value fails rule: ${rule.name} - ${rule.message}`
 				);
@@ -1202,6 +1204,8 @@ export function parseHumanTextToValidation(
 			rules.length === 1 ? '' : 's'
 		} from text`,
 		suggestions,
+		caseUnPassed,
+		allPassed,
 	};
 }
 

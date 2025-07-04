@@ -87,4 +87,6 @@ export interface ValidationExtractionResult {
 	confidence: number;
 	suggestions?: string[];
 	error?: string;
+	caseUnPassed?: string[];
+	allPassed?: boolean;
 }

@@ -12,16 +12,27 @@ import { calculateConfidence } from './helpers.js';
  */
 export function parsePositionalPatterns(
 	textForCapture: string,
-	testValue?: string
+	testValue?: string,
+	originalText?: string
 ): TextExtractionResult | null {
 	const suggestions: string[] = [];
 
 	// Handle "starts with X" patterns
 	const startsWithMatch = textForCapture.match(
-		/starts?\s+with\s+['""]?([^'""\s]+)['""]?/i
+		/starts?\s+with\s+['""]([^'""]+)['""]|starts?\s+with\s+([^\s]+)/i
 	);
-	if (startsWithMatch && startsWithMatch[1]) {
-		const targetText = startsWithMatch[1];
+	if (startsWithMatch && (startsWithMatch[1] || startsWithMatch[2])) {
+		// Use original text to preserve case if available
+		let targetText = startsWithMatch[1] || startsWithMatch[2] || '';
+		if (originalText) {
+			const originalMatch = originalText.match(
+				/starts?\s+with\s+['""]([^'""]+)['""]|starts?\s+with\s+([^\s]+)/i
+			);
+			if (originalMatch && (originalMatch[1] || originalMatch[2])) {
+				targetText = originalMatch[1] || originalMatch[2] || '';
+			}
+		}
+
 		const pattern = STARTS_WITH(targetText);
 		let confidence = 0.85;
 
@@ -42,10 +53,20 @@ export function parsePositionalPatterns(
 
 	// Handle "ends with X" patterns
 	const endsWithMatch = textForCapture.match(
-		/ends?\s+with\s+['""]?([^'""\s]+)['""]?/i
+		/ends?\s+with\s+['""]([^'""]+)['""]|ends?\s+with\s+([^\s]+)/i
 	);
-	if (endsWithMatch && endsWithMatch[1]) {
-		const targetText = endsWithMatch[1];
+	if (endsWithMatch && (endsWithMatch[1] || endsWithMatch[2])) {
+		// Use original text to preserve case if available
+		let targetText = endsWithMatch[1] || endsWithMatch[2] || '';
+		if (originalText) {
+			const originalMatch = originalText.match(
+				/ends?\s+with\s+['""]([^'""]+)['""]|ends?\s+with\s+([^\s]+)/i
+			);
+			if (originalMatch && (originalMatch[1] || originalMatch[2])) {
+				targetText = originalMatch[1] || originalMatch[2] || '';
+			}
+		}
+
 		const pattern = ENDS_WITH(targetText);
 		let confidence = 0.85;
 
@@ -66,10 +87,20 @@ export function parsePositionalPatterns(
 
 	// Handle "contains X" patterns
 	const containsMatch = textForCapture.match(
-		/contains?\s+['""]?([^'""\s]+)['""]?/i
+		/contains?\s+['""]([^'""]+)['""]|contains?\s+([^\s]+)/i
 	);
-	if (containsMatch && containsMatch[1]) {
-		const targetText = containsMatch[1];
+	if (containsMatch && (containsMatch[1] || containsMatch[2])) {
+		// Use original text to preserve case if available
+		let targetText = containsMatch[1] || containsMatch[2] || '';
+		if (originalText) {
+			const originalMatch = originalText.match(
+				/contains?\s+['""]([^'""]+)['""]|contains?\s+([^\s]+)/i
+			);
+			if (originalMatch && (originalMatch[1] || originalMatch[2])) {
+				targetText = originalMatch[1] || originalMatch[2] || '';
+			}
+		}
+
 		const pattern = CONTAINS(targetText);
 		let confidence = 0.8;
 

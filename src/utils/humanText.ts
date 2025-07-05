@@ -49,7 +49,11 @@ export function parseHumanTextToRegex(
 	let patternType: string | undefined;
 
 	// Check for compound requirements first (e.g., "email have number in domain")
-	const compoundResult = parseCompoundRequirements(normalizedText, testValue);
+	const compoundResult = parseCompoundRequirements(
+		normalizedText,
+		testValue,
+		humanText
+	);
 	if (compoundResult.success) {
 		return compoundResult;
 	}
@@ -129,7 +133,8 @@ export function parseHumanTextToRegex(
  */
 function parseCompoundRequirements(
 	normalizedText: string,
-	testValue?: string
+	testValue?: string,
+	originalText?: string
 ): TextExtractionResult {
 	// Always use normalized text to ensure case-insensitive matching
 	const textForCapture = normalizedText;
@@ -149,7 +154,11 @@ function parseCompoundRequirements(
 	];
 
 	for (const handler of handlers) {
-		const result = handler(textForCapture, testValue);
+		// For positional patterns, we need to pass the original text to preserve case
+		const result =
+			handler === parsePositionalPatterns && originalText
+				? handler(textForCapture, testValue, originalText)
+				: handler(textForCapture, testValue);
 		if (result) {
 			return result;
 		}

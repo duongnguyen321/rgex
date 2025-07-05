@@ -1,6 +1,6 @@
 {
 	"name": "rgex",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"description": "A powerful, chainable regex builder platform with comprehensive validation utilities",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
@@ -72,7 +72,7 @@
 	"bugs": {
 		"url": "https://github.com/duongnguyen321/rgex/issues"
 	},
-	"homepage": "https://github.com/duongnguyen321/rgex#readme",
+	"homepage": "https://duongnguyen321.github.io/rgex",
 	"files": [
 		"dist/",
 		"examples/",
@@ -82,9 +82,10 @@
 	],
 	"lint-staged": {
 		"*.{ts,tsx}": [
-			"bun run build",
-			"bun test",
-			"bun run build:docs"
+			"echo 'Building, testing, and generating docs...'",
+			"bash -c 'bun run build'",
+			"bash -c 'bun test'",
+			"bash -c 'bun run build:docs'"
 		]
 	}
 }

@@ -49,11 +49,7 @@ export function parseHumanTextToRegex(
 	let patternType: string | undefined;
 
 	// Check for compound requirements first (e.g., "email have number in domain")
-	const compoundResult = parseCompoundRequirements(
-		normalizedText,
-		testValue,
-		humanText
-	);
+	const compoundResult = parseCompoundRequirements(normalizedText, testValue);
 	if (compoundResult.success) {
 		return compoundResult;
 	}
@@ -133,10 +129,10 @@ export function parseHumanTextToRegex(
  */
 function parseCompoundRequirements(
 	normalizedText: string,
-	testValue?: string,
-	originalText?: string
+	testValue?: string
 ): TextExtractionResult {
-	const textForCapture = originalText || normalizedText;
+	// Always use normalized text to ensure case-insensitive matching
+	const textForCapture = normalizedText;
 
 	// Try each pattern handler in order (combined patterns first for complex cases)
 	const handlers = [

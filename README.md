@@ -1,266 +1,198 @@
-# RGex - Powerful Regex Builder Platform
+# RGex: The Intelligent Regex Toolkit
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![NPM](https://img.shields.io/badge/NPM-CB3837?style=flat-square&logo=npm&logoColor=white)](https://www.npmjs.com/)
+[![NPM Version](https://img.shields.io/npm/v/rgex?style=flat-square&color=CB3837&logo=npm)](https://www.npmjs.com/package/rgex)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/duongnguyen321/rgex/ci.yml?branch=main&style=flat-square)](https://github.com/duongnguyen321/rgex/actions/workflows/ci.yml)
+[![License](https://img.shields.io/npm/l/rgex?style=flat-square&color=lightgrey)](./LICENSE)
 
-A modern, chainable regex builder with intuitive methods and comprehensive validation utilities. Build complex regular expressions using readable, fluent syntax instead of cryptic regex patterns. Now featuring AI-powered human text parsing and advanced password validation.
+**RGex is a powerful, modern, and chainable regular expression builder for TypeScript and JavaScript.** It transforms cryptic regex syntax into a readable, fluent API. With features like human-text-to-regex parsing, advanced validation utilities, and a rich set of pre-built patterns, RGex simplifies even the most complex pattern-matching tasks.
 
-## ✨ Features
+## ✨ Key Features
 
-- 🔗 **Chainable API**: Build regex patterns using intuitive method chaining.
-- ✅ **Pre-built Patterns**: Ready-to-use patterns for emails, URLs, phones, and more.
-- 🧠 **AI Text Parsing**: Convert human descriptions to regex, from simple keywords ("email") to complex, multi-requirement sentences ("password with 2 uppercase, 2 numbers, and no common words").
-- 🔒 **Advanced Password Validation**: Detailed password strength analysis with scoring.
-- 🚀 **TypeScript Support**: Full type safety and IntelliSense support.
-- 🧪 **Comprehensive Testing**: Extensive test suite ensuring reliability.
-- 📦 **Zero Dependencies**: Lightweight with no external dependencies.
+- **🔗 Fluent & Chainable API**: Construct complex regex patterns with an intuitive, readable builder.
+- **🧠 Human Text Intelligence**: Convert natural language descriptions into regex patterns (`t2r`) or validation rules (`t2v`). Supports everything from simple keywords ("email") to sophisticated, multi-part requirements ("password with 2 uppercase, 2 numbers, and no common words").
+- **🛡️ Advanced Validation**: A comprehensive suite of validation tools for passwords, emails, and other data formats.
+- **📚 Rich Pattern Library**: Includes ready-to-use constants and builder methods for common types like emails, URLs, dates, JWTs, and more.
+- **🚀 TypeScript Native**: Built with TypeScript for full type safety, autocompletion, and a great developer experience.
+- **📦 Zero Dependencies**: Lightweight and self-contained.
 
-## 🚀 Quick Start
+## 📦 Installation
 
 ```bash
-# Install dependencies
-npm install
-
-# Run examples
-npm run examples
-
-# Run tests
-npm test
-
-# Run help/reference
-npm run help
+npm install rgex
 ```
 
-## 📁 Project Structure
+## 🚀 Core Concepts
 
-```
-rgex/
-├── src/                    # Main source code
-│   ├── core/               # Core RGex class and builder logic
-│   │   └── RGex.ts
-│   ├── utils/              # Utility functions
-│   │   ├── helpers.ts
-│   │   ├── humanText.ts    # AI-powered text parsing
-│   │   └── password.ts     # Password validation
-│   ├── constants/          # Pre-defined patterns and keywords
-│   │   ├── patterns.ts
-│   │   └── validation.ts
-│   ├── config/             # Library configuration
-│   │   └── index.ts
-│   └── index.ts            # Main entry point for exports
-├── types/                  # TypeScript type definitions
-│   └── index.ts
-├── examples/               # Usage examples
-│   └── examples.ts
-├── test/                   # Test suite
-│   └── rgex.test.ts
-├── scripts/                # Utility scripts
-│   └── scripts.ts
-├── package.json            # Package configuration
-└── README.md               # This file
-```
+RGex is built on three main pillars that you can use independently or together.
 
-## 📖 Basic Usage
+### 1. The `RGex` Fluent Builder
 
-### Creating Patterns
+The `RGex` class is a chainable API for constructing patterns method-by-method. It's best for when you need full, granular control.
 
 ```typescript
-import { rgex } from './index.js';
+import { RGex } from 'rgex';
 
-// Simple email pattern
-const emailPattern = rgex()
+const usernameRegex = RGex.create()
 	.start()
-	.word()
-	.oneOrMore()
-	.literal('@')
-	.word()
-	.oneOrMore()
-	.literal('.')
-	.word()
-	.quantifier(2, 4)
-	.end();
-
-console.log(emailPattern.test('user@example.com')); // true
+	.charClass('a-zA-Z0-9_-') // Letters, numbers, underscore, hyphen
+	.quantifier(3, 16) // 3 to 16 characters long
+	.end()
+	.build(); // -> /^[a-zA-Z0-9_-]{3,16}$/
 ```
 
-### Using Pre-built Patterns
+### 2. Human Text to Regex (`t2r`)
+
+For rapid development, `t2r` converts a description into a ready-to-use regex. It's powered by a sophisticated parser that understands a wide variety of patterns.
 
 ```typescript
-import { RGex } from './index.js';
+import { t2r } from 'rgex';
 
-// Validate common data types
-console.log(RGex.create().email().test('user@example.com')); // true
-console.log(RGex.create().url().test('https://example.com')); // true
-console.log(RGex.create().phone().test('+1234567890')); // true
-```
-
-## 🔧 API Reference
-
-### Builder Methods
-
-- **`literal(text)`**: Adds literal text, escaping special characters.
-- **`raw(pattern)`**: Adds a raw, unescaped regex pattern.
-- **`digit()`**: Matches any digit (`\\d`).
-- **`word()`**: Matches any word character (`\\w`).
-- **`whitespace()`**: Matches any whitespace character (`\\s`).
-- **`any()`**: Matches any character (`.`).
-- **`start()`**: Asserts the start of the string (`^`).
-- **`end()`**: Asserts the end of the string (`$`).
-- **`or(pattern)`**: Adds an "or" condition (`|`).
-- **`quantifier(min, max?)`**: Specifies a quantity range (`{min,max}`).
-- **`zeroOrMore()`**: Appends `*`.
-- **`oneOrMore()`**: Appends `+`.
-- **`optional()`**: Appends `?`.
-- **`group(pattern)`**: Creates a capturing group (`(...)`).
-- **`nonCapturingGroup(pattern)`**: Creates a non-capturing group (`(?:...)`).
-- **`lookahead(pattern, negative?)`**: Adds a positive or negative lookahead.
-- **`lookbehind(pattern, negative?)`**: Adds a positive or negative lookbehind.
-
-### Pre-built Patterns
-
-- **`email()`**: Matches a standard email format.
-- **`url()`**: Matches a standard URL.
-- **`phone()`**: Matches a standard phone number.
-- **`date()`**: Matches a date in `YYYY-MM-DD` format.
-- **`time()`**: Matches a time in `HH:MM` or `HH:MM:SS` format.
-- **`number()`**: Matches an integer or decimal number.
-- **`uuid()`**: Matches a UUID.
-- **`ipv4()`**: Matches an IPv4 address.
-- **`hexColor()`**: Matches a hex color code.
-
-### Utility Methods
-
-- **`test(input)`**: Tests the pattern against a string.
-- **`exec(input)`**: Executes the pattern and returns the match array.
-- **`match(input)`**: Returns all matches in the string.
-- **`replace(input, replacement)`**: Replaces matches with a string or function.
-- **`split(input)`**: Splits a string by the pattern.
-- **`build()`**: Builds and returns the `RegExp` object.
-- **`isValid()`**: Checks if the current pattern is a valid regex.
-- **`getPattern()`**: Returns the raw pattern string.
-- **`getFlags()`**: Returns the flags string.
-- **`clone()`**: Creates a copy of the `RGex` instance.
-- **`reset()`**: Clears the pattern and options.
-- **`toString()`**: Returns the string representation (`/pattern/flags`).
-
-## 🧠 AI-Powered Features
-
-### Human Text to Regex
-
-Convert natural language descriptions into regex patterns, from simple keywords to complex, multi-requirement sentences. RGex can understand a wide range of patterns, including industry-specific and complex validation rules.
-
-**Simple Example:**
-
-```typescript
-import { RGex } from './index.js';
-
-const emailResult = RGex.toRegex('email address', 'user@example.com');
-console.log(emailResult);
-// {
-//   success: true,
-//   pattern: /.../,
-//   description: 'Valid email address',
-//   confidence: 0.95,
-//   suggestions: []
-// }
-```
-
-**Advanced Combined Patterns:**
-
-The library also exports convenient aliases like `t2r` (`text-to-regex`) for quick use. It can now parse sophisticated requirements:
-
-```typescript
-import { t2r } from './index.js';
-
-// Business patterns
-const invoiceResult = t2r('invoice number with year and sequential number');
-// invoiceResult.pattern -> /^INV-(20\d{2})-\d{6}$/
-// Matches: INV-2024-001234
-
-// Security patterns
-const apiKeyResult = t2r('api key with prefix and 32 character hex string');
-// apiKeyResult.pattern -> /^sk_[0-9a-f]{32}$/
-// Matches: sk_1234567890abcdef1234567890abcdef
-
-// Complex validation
-const passwordResult = t2r(
-	'password with 2 uppercase 2 lowercase 2 numbers 2 special minimum 12 characters no common words'
+// Generates a complex pattern with lookaheads for each requirement
+const { pattern } = t2r(
+	'password with 2 uppercase 2 lowercase 2 numbers 2 special chars'
 );
-// passwordResult.pattern -> /^(?=(?:.*[A-Z]){2,})(?=...
-// Enforces enterprise-grade password policies
+```
 
-// International support
-const unicodeResult = t2r(
-	'text with unicode letters numbers and common punctuation'
+_Aliases: `h2r`, `humanToRegex`, `textToRegex`, `parseHumanTextToRegex`_
+
+### 3. Human Text to Validation (`t2v`)
+
+Similarly, `t2v` creates a set of validation rules from a description, which you can use to check inputs directly without writing regex.
+
+```typescript
+import { t2v } from 'rgex';
+
+const validation = t2v(
+	'required email with custom domain not gmail or yahoo',
+	'contact@my-company.com'
 );
-// unicodeResult.pattern -> /^[\p{L}\p{N}\p{P}\s]+$/u
-// Matches: "Hello 世界! 123", "Café résumé naïve"
+
+console.log(validation.allPassed); // true
 ```
 
-The system supports over 11 categories of advanced patterns.
+_Aliases: `h2v`, `humanToValidation`, `textToValidation`, `parseHumanTextToValidation`_
 
-### Human Text to Validation
+---
 
-Extract validation rules from a description:
+## 📖 Full API Reference
 
-```typescript
-import { parseHumanTextToValidation } from './index.js';
+The library exports a rich set of classes, functions, types, and constants.
 
-const validationResult = parseHumanTextToValidation(
-	'required email min length 5 max length 50',
-	'test@example.com'
-);
-console.log(validationResult);
-// {
-//   success: true,
-//   rules: [ ... ],
-//   confidence: 0.6
-// }
-```
+### The `RGex` Class API
 
-## 🔒 Advanced Password Validation
+This is the core of the fluent builder pattern.
 
-Validate password strength with detailed analysis and scoring:
+#### Static Methods
 
-```typescript
-import { validatePassword } from './index.js';
+| Method                                  | Description                                                 |
+| --------------------------------------- | ----------------------------------------------------------- |
+| `RGex.create(pattern?, opts?)`          | Creates a new `RGex` instance.                              |
+| `RGex.toRegex(text)` (`h2r`)            | Converts human text to a regex pattern.                     |
+| `RGex.toValidate(text)` (`h2v`)         | Converts human text to validation rules.                    |
+| `RGex.getSuggestions(text)` (`suggest`) | Gets pattern suggestions for a text string.                 |
+| `RGex.humanText(text)`                  | Creates a `RGex` instance directly from a text description. |
+| `RGex.fromJSON(json)`                   | Creates an instance from a JSON object.                     |
+| `RGex.escape(text)`                     | Escapes special regex characters in a string.               |
+| `RGex.validate(pattern)`                | Validates if a string is a valid regex pattern.             |
+| `RGex.normalize(text)`                  | Normalizes text (e.g., removes diacritics).                 |
 
-const result = validatePassword('MyStr0ng!P@ssw0rd2024', {
-	minLength: 8,
-	maxLength: 50,
-	hasNumber: true,
-	hasSpecial: true,
-	hasUpperChar: true,
-	hasLowerChar: true,
-	noSequential: true,
-	noRepeating: true,
-	noCommonWords: true,
-});
+#### Builder & Pattern Methods
 
-console.log(result);
-// {
-//   error: null,
-//   pass: { ... }, // Detailed pass/fail for each rule
-//   score: 100,
-//   strength: 'very-strong'
-// }
-```
+| Method                                         | Description                                     |
+| ---------------------------------------------- | ----------------------------------------------- | --- |
+| `.literal(text)`                               | Adds literal text, escaping special characters. |
+| `.raw(pattern)`                                | Adds a raw, unescaped regex pattern.            |
+| `.charClass(chars, negate?)`                   | Creates a character class like `[a-z0-9]`.      |
+| `.digit()` / `.word()` / `.whitespace()`       | Adds `\d`, `\w`, or `\s`.                       |
+| `.group(pattern)`                              | Creates a capturing group `(...)`.              |
+| `.quantifier(min, max?)`                       | Specifies quantity, e.g., `{1,3}`.              |
+| `.or(pattern)`                                 | Adds an "or" condition (`                       | `). |
+| `.start()` / `.end()`                          | Anchors the pattern with `^` and `$`.           |
+| `.lookahead(p, neg?)` / `.lookbehind(p, neg?)` | Adds lookarounds.                               |
+| `.email()` / `.url()` / `.uuid()` / etc.       | Appends pre-built patterns for common types.    |
 
-You can also use the `passwordCase` method on an `RGex` instance:
+#### Flag & Execution Methods
 
-```typescript
-import { RGex } from './index.js';
+| Method                               | Description                                                         |
+| ------------------------------------ | ------------------------------------------------------------------- |
+| `.ignoreCase()` / `.global()` / etc. | Sets regex flags (`i`, `g`, etc.).                                  |
+| `.build()`                           | Builds and returns the final `RegExp` object.                       |
+| `.test(input)`                       | Tests the pattern against a string.                                 |
+| `.exec(input)`                       | Executes the pattern and returns match details.                     |
+| `.clone()`                           | Creates a copy of the `RGex` instance.                              |
+| `.reset()`                           | Clears the pattern and options.                                     |
+| `.toString()`                        | Returns the string representation `/pattern/flags`.                 |
+| `.toJSON()`                          | Returns a JSON representation of the pattern and flags.             |
+| `.passwordCase(options?)`            | Performs detailed password strength analysis on the pattern string. |
 
-const result = new RGex('MyStr0ng!P@ssw0rd2024').passwordCase({
-	minLength: 12,
-	hasSpecial: true,
-});
-```
+### Standalone Functions
+
+These can be imported and used directly without a `RGex` instance.
+
+#### Password & Validation Utilities
+
+| Function                        | Description                                                    |
+| ------------------------------- | -------------------------------------------------------------- |
+| `validatePassword(pass, opts?)` | Performs a comprehensive password strength analysis.           |
+| `generateStrongPassword(opts?)` | Generates a cryptographically secure password.                 |
+| `getPasswordSuggestions(pass)`  | Suggests improvements for a weak password.                     |
+| `hasCommonWords(pass)`          | Checks if a password is in a list of common passwords.         |
+| `hasSequentialChars(pass)`      | Checks for sequential characters (e.g., "abc", "123").         |
+| `hasRepeatingChars(pass)`       | Checks for repeating character sequences (e.g., "aaa", "111"). |
+| `isValidEmail(email)`           | Validates an email address.                                    |
+| `isValidRegex(pattern)`         | Validates if a string is a valid regex pattern.                |
+
+#### General & Helper Utilities
+
+| Function                        | Description                                                             |
+| ------------------------------- | ----------------------------------------------------------------------- |
+| `escapeRegex(text)`             | Escapes special regex characters.                                       |
+| `extractNumbers(text)`          | Extracts all numbers from a string.                                     |
+| `normalizeText(text)`           | Removes diacritics and normalizes whitespace.                           |
+| `mergePatterns(...patterns)`    | Combines multiple regex patterns into one.                              |
+| `generateTestData(pattern)`     | Generates random test data that matches a regex.                        |
+| `calculatePatternComplexity(p)` | Calculates a complexity score for a regex pattern.                      |
+| `optionsToFlags(opts)`          | Converts a `RegexBuilderOptions` object to a flags string (e.g., "gi"). |
+| `flagsToOptions(flags)`         | Converts a flags string to an options object.                           |
+
+### Exported Constants
+
+Use these constants to access pre-built patterns and character sets directly.
+
+- **`REGEX_PATTERNS`**: An object containing ready-to-use regex patterns for `EMAIL`, `URL`, `UUID`, `JWT`, `IPV4`, `SEMVER`, etc.
+- **`HUMAN_PATTERNS`**: Maps human-readable phrases to their corresponding regex patterns.
+- **`VALIDATION_PATTERNS`**: Patterns used internally by the validation engine.
+- **`PATTERN_KEYWORDS`**: Keywords used by `t2r` to identify pattern types.
+- **`VALIDATION_KEYWORDS`**: Keywords used by `t2v` to identify validation rules.
+- **`COMMON_PASSWORDS`**: A `Set` containing thousands of common passwords.
+- **`SPECIAL_CHARS`**, **`SYMBOLS`**: Strings containing sets of special characters for password generation and validation.
+
+### Exported Types
+
+RGex is fully typed for a superior developer experience.
+
+- **`RGex`**: The core class.
+- **`RegexBuilderOptions`**: Options for the builder (e.g., `{ global: true }`).
+- **`TextExtractionResult`**: The return type of `t2r`, containing the pattern, confidence, etc.
+- **`ValidationExtractionResult`**: The return type of `t2v`, containing rules and pass/fail status.
+- **`PasswordValidationOptions`**: Rules for password validation (e.g., `{ minLength: 8, hasUpper: true }`).
+- **`PasswordValidationResult`**: The detailed analysis object returned by `validatePassword`.
+- **`ValidationRule`**: A type representing a single validation rule.
+- **`HumanTextPattern`**: The structure for defining human-to-regex mappings.
+
+### Configuration
+
+- **`RGEX_CONFIG`**: A global configuration object containing default settings, feature flags, and messages used by the library.
+
+## 📚 Official Documentation
+
+For a deep dive into every function, type, and constant, please see our **[Full API Documentation](https://duongnguyen321.github.io/rgex)**, which is automatically generated from the source code via [TypeDoc](https://typedoc.org/) and includes the **[Advanced T2R/T2V Patterns Guide](./T2R-T2V.md)**.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request if you have any suggestions or improvements.
+Contributions are welcome! Whether it's a bug report, a new feature, or an improvement to the documentation, please feel free to open an issue or submit a pull request.
 
-## 📄 License
+## 📜 License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**. See the [LICENSE](./LICENSE) file for details.

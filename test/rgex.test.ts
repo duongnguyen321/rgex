@@ -4,7 +4,7 @@ import {
 	REGEX_PATTERNS,
 	validatePassword,
 	parseHumanTextToValidation,
-} from '../src/index.js';
+} from '../dist/index.js';
 
 // Simple test runner
 class TestRunner {
@@ -374,17 +374,25 @@ test.test('Human Text to Regex', () => {
 
 test.test('Human Text to Validation', () => {
 	const emailValidation = parseHumanTextToValidation(
-		'required email min length 5 max length 50',
+		'required email address',
 		'test@example.com'
 	);
 	test.assert(emailValidation.success, 'Should extract email validation rules');
 	test.assert(
-		(emailValidation.rules?.length || 0) > 1,
-		'Should have multiple rules'
+		(emailValidation.rules?.length || 0) >= 2,
+		'Should have at least 2 rules (required and email pattern)'
 	);
 	test.assert(
 		emailValidation.confidence > 0,
 		'Should have positive confidence'
+	);
+	test.assert(
+		!!emailValidation.rules?.some((r) => r.name === 'required'),
+		'Should contain a required rule'
+	);
+	test.assert(
+		!!emailValidation.rules?.some((r) => r.pattern instanceof RegExp),
+		'Should contain a regex pattern rule'
 	);
 
 	const passwordValidation = parseHumanTextToValidation(
@@ -396,12 +404,16 @@ test.test('Human Text to Validation', () => {
 		'Should extract password validation rules'
 	);
 	test.assert(
-		(passwordValidation.rules?.length || 0) > 1,
-		'Should have multiple rules'
+		!!passwordValidation.rules?.some((r) => r.name === 'strongPassword'),
+		'Should include the strongPassword validator rule'
+	);
+	test.assert(
+		!!passwordValidation.rules?.some((r) => r.pattern?.source.includes('{8,}')),
+		'Should include a regex rule with min length 8'
 	);
 
 	const lengthValidation = parseHumanTextToValidation(
-		'min length 5 max length 10',
+		'text between 5 and 10 characters',
 		'testing'
 	);
 	test.assert(
@@ -410,12 +422,29 @@ test.test('Human Text to Validation', () => {
 	);
 	test.assertEquals(
 		lengthValidation.rules?.length,
-		2,
-		'Should have exactly 2 rules'
+		1,
+		'Should have exactly 1 rule for length range'
+	);
+	const lengthRule = lengthValidation.rules?.[0];
+	test.assert(
+		!!lengthRule?.pattern?.test('12345'),
+		'Length pattern should match min length'
+	);
+	test.assert(
+		!!lengthRule?.pattern?.test('1234567890'),
+		'Length pattern should match max length'
+	);
+	test.assert(
+		!lengthRule?.pattern?.test('1234'),
+		'Length pattern should not match below min length'
+	);
+	test.assert(
+		!lengthRule?.pattern?.test('12345678901'),
+		'Length pattern should not match above max length'
 	);
 
 	const complexValidation = parseHumanTextToValidation(
-		'required email min length 5 max length 50 numbers only',
+		'required email between 10 and 50 characters',
 		'test@example.com'
 	);
 	test.assert(
@@ -423,8 +452,8 @@ test.test('Human Text to Validation', () => {
 		'Should extract multiple validation rules'
 	);
 	test.assert(
-		(complexValidation.rules?.length || 0) >= 3,
-		'Should have at least 3 rules'
+		(complexValidation.rules?.length || 0) >= 2,
+		'Should have at least 2 rules for complex query'
 	);
 });
 

@@ -5,7 +5,7 @@ import {
 	validatePassword,
 	parseHumanTextToRegex,
 	parseHumanTextToValidation,
-} from '../src/index.js';
+} from '../dist/index.js';
 
 console.log('🚀 RGex - Enhanced Regex Builder Platform Examples\n');
 

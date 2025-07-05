@@ -9,7 +9,7 @@ A modern, chainable regex builder with intuitive methods and comprehensive valid
 
 - 🔗 **Chainable API**: Build regex patterns using intuitive method chaining.
 - ✅ **Pre-built Patterns**: Ready-to-use patterns for emails, URLs, phones, and more.
-- 🧠 **AI Text Parsing**: Convert human descriptions to regex patterns and validation rules.
+- 🧠 **AI Text Parsing**: Convert human descriptions to regex, from simple keywords ("email") to complex, multi-requirement sentences ("password with 2 uppercase, 2 numbers, and no common words").
 - 🔒 **Advanced Password Validation**: Detailed password strength analysis with scoring.
 - 🚀 **TypeScript Support**: Full type safety and IntelliSense support.
 - 🧪 **Comprehensive Testing**: Extensive test suite ensuring reliability.
@@ -147,7 +147,9 @@ console.log(RGex.create().phone().test('+1234567890')); // true
 
 ### Human Text to Regex
 
-Convert natural language descriptions into regex patterns:
+Convert natural language descriptions into regex patterns, from simple keywords to complex, multi-requirement sentences. RGex can understand a wide range of patterns, including industry-specific and complex validation rules.
+
+**Simple Example:**
 
 ```typescript
 import { RGex } from './index.js';
@@ -158,9 +160,44 @@ console.log(emailResult);
 //   success: true,
 //   pattern: /.../,
 //   description: 'Valid email address',
-//   confidence: 0.95
+//   confidence: 0.95,
+//   suggestions: []
 // }
 ```
+
+**Advanced Combined Patterns:**
+
+The library also exports convenient aliases like `t2r` (`text-to-regex`) for quick use. It can now parse sophisticated requirements:
+
+```typescript
+import { t2r } from './index.js';
+
+// Business patterns
+const invoiceResult = t2r('invoice number with year and sequential number');
+// invoiceResult.pattern -> /^INV-(20\d{2})-\d{6}$/
+// Matches: INV-2024-001234
+
+// Security patterns
+const apiKeyResult = t2r('api key with prefix and 32 character hex string');
+// apiKeyResult.pattern -> /^sk_[0-9a-f]{32}$/
+// Matches: sk_1234567890abcdef1234567890abcdef
+
+// Complex validation
+const passwordResult = t2r(
+	'password with 2 uppercase 2 lowercase 2 numbers 2 special minimum 12 characters no common words'
+);
+// passwordResult.pattern -> /^(?=(?:.*[A-Z]){2,})(?=...
+// Enforces enterprise-grade password policies
+
+// International support
+const unicodeResult = t2r(
+	'text with unicode letters numbers and common punctuation'
+);
+// unicodeResult.pattern -> /^[\p{L}\p{N}\p{P}\s]+$/u
+// Matches: "Hello 世界! 123", "Café résumé naïve"
+```
+
+The system supports over 11 categories of advanced patterns. For a full list of capabilities, see [`ENHANCED_T2R_SUMMARY.md`](./ENHANCED_T2R_SUMMARY.md).
 
 ### Human Text to Validation
 

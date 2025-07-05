@@ -45,6 +45,7 @@
 		"./package.json": "./package.json"
 	},
 	"scripts": {
+		"lint": "tsc --noEmit",
 		"test": "bun run test/index.test.ts",
 		"examples": "bun run examples/examples.ts",
 		"help": "bun run scripts/scripts.ts",

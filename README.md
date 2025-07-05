@@ -99,18 +99,18 @@ This is the core of the fluent builder pattern.
 
 #### Builder & Pattern Methods
 
-| Method                                         | Description                                     |
-| ---------------------------------------------- | ----------------------------------------------- | --- |
-| `.literal(text)`                               | Adds literal text, escaping special characters. |
-| `.raw(pattern)`                                | Adds a raw, unescaped regex pattern.            |
-| `.charClass(chars, negate?)`                   | Creates a character class like `[a-z0-9]`.      |
-| `.digit()` / `.word()` / `.whitespace()`       | Adds `\d`, `\w`, or `\s`.                       |
-| `.group(pattern)`                              | Creates a capturing group `(...)`.              |
-| `.quantifier(min, max?)`                       | Specifies quantity, e.g., `{1,3}`.              |
-| `.or(pattern)`                                 | Adds an "or" condition (`                       | `). |
-| `.start()` / `.end()`                          | Anchors the pattern with `^` and `$`.           |
-| `.lookahead(p, neg?)` / `.lookbehind(p, neg?)` | Adds lookarounds.                               |
-| `.email()` / `.url()` / `.uuid()` / etc.       | Appends pre-built patterns for common types.    |
+| Method                                        | Description                                     |
+| --------------------------------------------- | ----------------------------------------------- |
+| `.literal(text)`                              | Adds literal text, escaping special characters. |
+| `.raw(pattern)`                               | Adds a raw, unescaped regex pattern.            |
+| `.charClass(chars, negate?)`                  | Creates a character class like `[a-z0-9]`.      |
+| `.digit()`, `.word()`, `.whitespace()`        | Adds `\d`, `\w`, or `\s`.                       |
+| `.group(pattern)`                             | Creates a capturing group `(...)`.              |
+| `.quantifier(min, max?)`                      | Specifies quantity, e.g., `{1,3}`.              |
+| `.or(pattern)`                                | Adds an "or" condition (`\|`).                  |
+| `.start()`, `.end()`                          | Anchors the pattern with `^` and `$`.           |
+| `.lookahead(p, neg?)`, `.lookbehind(p, neg?)` | Adds lookarounds.                               |
+| `.email()`, `.url()`, `.uuid()`, etc.         | Appends pre-built patterns for common types.    |
 
 #### Flag & Execution Methods
 

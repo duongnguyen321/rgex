@@ -468,67 +468,56 @@ export function getPatternSuggestions(text: string): string[] {
 // ============================================
 
 /**
- * @deprecated Use `parseHumanTextToRegex` instead. This alias will be removed in a future version.
- * Short alias for parseHumanTextToRegex. Converts human text to a regex pattern.
+ * An alias for `parseHumanTextToRegex`.
  */
 export const humanToRegex = parseHumanTextToRegex;
 
 /**
- * @deprecated Use `parseHumanTextToRegex` instead. This alias will be removed in a future version.
- * Short alias for parseHumanTextToRegex. Converts human text to a regex pattern.
+ * An alias for `parseHumanTextToRegex`.
  */
 export const textToRegex = parseHumanTextToRegex;
 
 /**
- * @deprecated Use `parseHumanTextToValidation` instead. This alias will be removed in a future version.
- * Short alias for parseHumanTextToValidation. Converts human text to validation rules.
+ * An alias for `parseHumanTextToValidation`.
  */
 export const humanToValidation = parseHumanTextToValidation;
 
 /**
- * @deprecated Use `parseHumanTextToValidation` instead. This alias will be removed in a future version.
- * Short alias for parseHumanTextToValidation. Converts human text to validation rules.
+ * An alias for `parseHumanTextToValidation`.
  */
 export const textToValidation = parseHumanTextToValidation;
 
 /**
- * @deprecated Use `getPatternSuggestions` instead. This alias will be removed in a future version.
- * Short alias for getPatternSuggestions. Gets pattern suggestions for text.
+ * An alias for `getPatternSuggestions`.
  */
 export const getSuggestions = getPatternSuggestions;
 
 /**
- * @deprecated Use `getPatternSuggestions` instead. This alias will be removed in a future version.
- * Short alias for getPatternSuggestions. Gets pattern suggestions for text.
+ * An alias for `getPatternSuggestions`.
  */
 export const textToSuggestions = getPatternSuggestions;
 
 /**
- * @deprecated Use `parseHumanTextToRegex` instead. This alias will be removed in a future version.
- * Short alias for parseHumanTextToRegex. Converts human text to a regex pattern.
+ * An alias for `parseHumanTextToRegex`.
  */
 export const h2r = parseHumanTextToRegex; // human to regex
 
 /**
- * @deprecated Use `parseHumanTextToRegex` instead. This alias will be removed in a future version.
- * Short alias for parseHumanTextToRegex. Converts human text to a regex pattern.
+ * An alias for `parseHumanTextToRegex`.
  */
 export const t2r = parseHumanTextToRegex; // text to regex
 
 /**
- * @deprecated Use `parseHumanTextToValidation` instead. This alias will be removed in a future version.
- * Short alias for parseHumanTextToValidation. Converts human text to validation rules.
+ * An alias for `parseHumanTextToValidation`.
  */
 export const h2v = parseHumanTextToValidation; // human to validation
 
 /**
- * @deprecated Use `parseHumanTextToValidation` instead. This alias will be removed in a future version.
- * Short alias for parseHumanTextToValidation. Converts human text to validation rules.
+ * An alias for `parseHumanTextToValidation`.
  */
 export const t2v = parseHumanTextToValidation; // text to validation
 
 /**
- * @deprecated Use `getPatternSuggestions` instead. This alias will be removed in a future version.
- * Short alias for getPatternSuggestions.
+ * An alias for `getPatternSuggestions`.
  */
 export const suggest = getPatternSuggestions;

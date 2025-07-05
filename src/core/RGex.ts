@@ -1,7 +1,17 @@
 /**
+ * @fileoverview Core RGex class with fluent API for building regular expressions
+ * @module Core
+ * @category Core
+ * @group RGex Builder
+ * @author duongnguyen321 - https://duonguyen.site
+ */
+
+/**
  * @class RGex
  * @classdesc The main class for building and manipulating regular expressions using a fluent, chainable API.
  * It also provides static methods for AI-powered text-to-regex and validation rule generation.
+ * @category Core
+ * @group RGex Builder
  */
 
 import type {
@@ -689,25 +699,21 @@ export class RGex {
 	// ============================================
 
 	/**
-	 * @deprecated Use RGex.toRegex instead.
 	 * Alias for `RGex.toRegex`.
 	 */
 	static h2r = RGex.toRegex;
 
 	/**
-	 * @deprecated Use RGex.toValidate instead.
 	 * Alias for `RGex.toValidate`.
 	 */
 	static h2v = RGex.toValidate;
 
 	/**
-	 * @deprecated Use RGex.humanText instead.
 	 * Alias for `RGex.humanText`.
 	 */
 	static human = RGex.humanText;
 
 	/**
-	 * @deprecated Use RGex.getSuggestions instead.
 	 * Alias for `RGex.getSuggestions`.
 	 */
 	static suggest = RGex.getSuggestions;

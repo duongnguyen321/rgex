@@ -1,6 +1,9 @@
 /**
- * RGex Helper Utilities
- * Common utility functions used throughout the library
+ * @fileoverview RGex Helper Utilities - Common utility functions used throughout the library
+ * @module Utilities
+ * @category Utilities
+ * @group Helper Functions
+ * @author duongnguyen321 - https://duonguyen.site
  */
 
 import type { RegexBuilderOptions } from '../../types/index.js';

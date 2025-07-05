@@ -183,6 +183,10 @@
  * - **Examples**: https://github.com/duongnguyen321/rgex/tree/main/examples
  *
  * @packageDocumentation
+ * @module RGex
+ * @category Main
+ * @group Entry Point
+ * @author duongnguyen321 - https://duonguyen.site
  */
 
 // Re-export types

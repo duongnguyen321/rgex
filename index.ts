@@ -1,6 +1,9 @@
 /**
- * RGex Entry Point
- * Provides backward compatibility and main exports
+ * @fileoverview RGex Entry Point - Provides backward compatibility and main exports
+ * @module RGex
+ * @category Main
+ * @group Entry Point
+ * @author duongnguyen321 - https://duonguyen.site
  */
 
 // Export everything from the main source

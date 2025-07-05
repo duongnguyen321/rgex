@@ -281,8 +281,8 @@ code,
 	background: var(--light-bg) !important;
 	border: 1px solid var(--warning-color);
 	border-radius: 8px;
-	padding: 16px;
 	margin: 16px 0;
+	margin-bottom: 8px;
 	box-shadow: 0 2px 8px rgba(217, 119, 6, 0.1);
 	color: var(--warning-color) !important;
 }

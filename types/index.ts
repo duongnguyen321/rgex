@@ -1,5 +1,9 @@
 /**
- * RGex - Type Definitions
+ * @fileoverview RGex - Type Definitions
+ * @module Types
+ * @category Types
+ * @group Type Definitions
+ * @author duongnguyen321 - https://duonguyen.site
  */
 
 export interface RegexBuilderOptions {

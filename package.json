@@ -1,6 +1,6 @@
 {
 	"name": "rgex",
-	"version": "1.1.3-stable",
+	"version": "1.1.6-stable",
 	"description": "A powerful, chainable regex builder platform with comprehensive validation utilities",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
@@ -12,27 +12,48 @@
 			"require": "./dist/index.js",
 			"types": "./dist/index.d.ts"
 		},
+		"./core": {
+			"import": "./dist/core.js",
+			"require": "./dist/core.js",
+			"types": "./dist/core.d.ts"
+		},
+		"./utils": {
+			"import": "./dist/utils.js",
+			"require": "./dist/utils.js",
+			"types": "./dist/utils.d.ts"
+		},
+		"./human-text": {
+			"import": "./dist/human-text.js",
+			"require": "./dist/human-text.js",
+			"types": "./dist/human-text.d.ts"
+		},
+		"./password": {
+			"import": "./dist/password.js",
+			"require": "./dist/password.js",
+			"types": "./dist/password.d.ts"
+		},
+		"./constants": {
+			"import": "./dist/constants.js",
+			"require": "./dist/constants.js",
+			"types": "./dist/constants.d.ts"
+		},
+		"./types": {
+			"import": "./dist/types.js",
+			"require": "./dist/types.js",
+			"types": "./dist/types.d.ts"
+		},
 		"./package.json": "./package.json"
 	},
 	"scripts": {
-		"test": "tsx test/index.test.ts",
-		"examples": "tsx examples/examples.ts",
-		"help": "tsx scripts/scripts.ts",
-		"dev": "tsx src/index.ts",
-		"build:js": "bun build src/index.ts --outdir dist --target node --splitting --format esm",
-		"build:js:min": "bun build src/index.ts --outdir dist --target node --minify --splitting --format esm",
-		"build:types": "tsc --emitDeclarationOnly",
-		"build:docs": "typedoc --options typedoc.json",
-		"build": "bun run build:js && bun run build:types && bun run build:docs",
-		"build:min": "bun run build:js:min && bun run build:types",
-		"build:ci": "bun install && bun run build && bun test",
-		"docs": "bun run build:docs && echo 'Markdown documentation generated in docs/'",
-		"docs:preview": "bun run build:docs && echo 'Documentation built! Check docs/README.md'",
-		"pages:build": "bun run build:docs && echo 'GitHub Pages build complete'",
-		"pages:info": "bun run scripts/github-actions-info.ts",
-		"lint": "tsc --noEmit",
-		"start": "tsx examples/examples.ts",
-		"postinstall": "node scripts/postinstall.js",
+		"test": "bun run test/index.test.ts",
+		"examples": "bun run examples/examples.ts",
+		"help": "bun run scripts/scripts.ts",
+		"build:js": "bun run scripts/build.ts",
+		"build:docs": "bun run scripts/build.ts docs",
+		"build": "bun run scripts/build.ts full",
+		"build:ci": "bun run scripts/build.ts ci",
+		"postinstall": "bun run scripts/postinstall.js",
+		"clean": "rm -rf dist docs docs-md",
 		"prepare": "husky"
 	},
 	"keywords": [
@@ -74,9 +95,7 @@
 	"files": [
 		"dist/",
 		"examples/",
-		"scripts/",
-		"README.md",
-		"LICENSE"
+		"scripts/"
 	],
 	"lint-staged": {
 		"*.{ts,tsx}": [

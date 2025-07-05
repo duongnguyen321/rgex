@@ -1,6 +1,9 @@
 /**
- * RGex Pattern Constants
- * Pre-defined regex patterns for common use cases
+ * @fileoverview RGex Pattern Constants - Pre-defined regex patterns for common use cases
+ * @module Constants
+ * @category Constants
+ * @group Pattern Definitions
+ * @author duongnguyen321 - https://duonguyen.site
  */
 
 import type { HumanTextPattern } from '../../types/index.js';

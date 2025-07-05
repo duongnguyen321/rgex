@@ -44,6 +44,6 @@
 		"noUnusedParameters": false,
 		"noPropertyAccessFromIndexSignature": false
 	},
-	"include": ["src/**/*", "types/**/*", "index.ts"],
+	"include": ["src/**/*", "types/**/*", "*.ts"],
 	"exclude": ["node_modules", "dist", "test", "examples", "scripts"]
 }

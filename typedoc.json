@@ -1,7 +1,16 @@
 {
-	"entryPoints": ["src/index.ts"],
+	"entryPoints": [
+		"index.ts",
+		"core.ts",
+		"utils.ts",
+		"human-text.ts",
+		"password.ts",
+		"constants.ts",
+		"types.ts"
+	],
+	"entryPointStrategy": "expand",
 	"out": "docs",
-	"name": "RGex - Powerful Regex Builder Platform",
+	"name": "RGex Builder Platform",
 	"readme": "README.md",
 	"theme": "default",
 	"includeVersion": true,
@@ -14,13 +23,15 @@
 	"sourceLinkTemplate": "https://github.com/duongnguyen321/rgex/blob/{gitRevision}/{path}#L{line}",
 	"gitRevision": "main",
 	"categorizeByGroup": true,
-	"categoryOrder": [
-		"Classes",
-		"Functions",
-		"Variables",
-		"Type Aliases",
-		"Interfaces",
-		"Modules"
+	"categoryOrder": ["Core", "Utilities", "Constants", "Types", "Configuration"],
+	"groupOrder": [
+		"Core",
+		"Utilities",
+		"Human Text Processing",
+		"Password Validation",
+		"Pattern Matching",
+		"Configuration",
+		"Types & Interfaces"
 	],
 	"sort": ["source-order", "alphabetical"],
 	"searchInComments": true,
@@ -33,6 +44,7 @@
 	},
 	"commentStyle": "jsdoc",
 	"blockTags": [
+		"@author",
 		"@alpha",
 		"@beta",
 		"@deprecated",
@@ -51,7 +63,13 @@
 		"@since",
 		"@throws",
 		"@typeParam",
-		"@virtual"
+		"@virtual",
+		"@module",
+		"@namespace",
+		"@category",
+		"@group",
+		"@fileoverview",
+		"@packageDocumentation"
 	],
 	"inlineTags": ["@inheritDoc", "@label", "@link", "@linkcode", "@linkplain"],
 	"modifierTags": [
@@ -67,46 +85,19 @@
 		"@virtual"
 	],
 	"navigationLinks": {
-		"GitHub": "https://github.com/duongnguyen321/rgex",
-		"NPM": "https://www.npmjs.com/package/rgex",
-		"Documentation": "https://duongnguyen321.github.io/rgex/",
-		"Examples": "https://github.com/duongnguyen321/rgex/tree/main/examples"
+		"🔗 Examples": "https://github.com/duongnguyen321/rgex/tree/main/examples",
+		"💡 Feature Requests": "https://github.com/duongnguyen321/rgex/discussions",
+		"📖 T2R & T2V Guide": "https://github.com/duongnguyen321/rgex/blob/main/T2R-T2V.md",
+		"📖 Modular Imports": "https://github.com/duongnguyen321/rgex/blob/main/MODULAR_IMPORTS.md"
 	},
 	"sidebarLinks": {
 		"🏠 Home": "https://duongnguyen321.github.io/rgex/",
-		"📚 GitHub Repository": "https://github.com/duongnguyen321/rgex",
-		"📦 NPM Package": "https://www.npmjs.com/package/rgex",
+		"📚 GitHub": "https://github.com/duongnguyen321/rgex",
 		"🐛 Report Issues": "https://github.com/duongnguyen321/rgex/issues",
-		"💡 Feature Requests": "https://github.com/duongnguyen321/rgex/discussions",
-		"📖 T2R & T2V Guide": "https://github.com/duongnguyen321/rgex/blob/main/T2R-T2V.md"
+		"📦 NPM": "https://www.npmjs.com/package/rgex"
 	},
 	"customCss": "./docs-template/custom.css",
 	"includeHierarchySummary": true,
-	"kindSortOrder": [
-		"Document",
-		"Project",
-		"Module",
-		"Namespace",
-		"Enum",
-		"EnumMember",
-		"Class",
-		"Interface",
-		"TypeAlias",
-		"Constructor",
-		"Property",
-		"Variable",
-		"Function",
-		"Accessor",
-		"Method",
-		"Parameter",
-		"TypeParameter",
-		"TypeLiteral",
-		"CallSignature",
-		"ConstructorSignature",
-		"IndexSignature",
-		"GetSignature",
-		"SetSignature"
-	],
 	"titleLink": "https://duongnguyen321.github.io/rgex/",
 	"visibilityFilters": {
 		"protected": false,
@@ -114,11 +105,19 @@
 		"inherited": true,
 		"external": false
 	},
-	"searchCategoryBoosts": {
-		"Classes": 1.5,
-		"Functions": 1.2,
-		"Variables": 1.0,
-		"Type Aliases": 0.8,
-		"Interfaces": 1.1
-	}
+	"kindSortOrder": [
+		"Project",
+		"Module",
+		"Namespace",
+		"Class",
+		"Interface",
+		"TypeAlias",
+		"Variable",
+		"Function",
+		"Constructor",
+		"Property",
+		"Method",
+		"Accessor"
+	],
+	"skipErrorChecking": false
 }

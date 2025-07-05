@@ -7,7 +7,16 @@ import type { TextExtractionResult } from '../../types/index.js';
 import { calculateConfidence } from './helpers.js';
 
 /**
- * Parse email-related patterns
+ * Parses text for common email address related patterns.
+ *
+ * This function identifies various email patterns such as emails with numbers in the domain,
+ * emails restricted to a ".com" TLD, corporate emails (by excluding common free providers),
+ * and emails without plus signs. It returns a structured result with the corresponding
+ * regex pattern, a confidence score, and a description.
+ *
+ * @param textForCapture - The natural language text to be analyzed for email patterns.
+ * @param testValue - An optional string to test the generated pattern against for confidence scoring.
+ * @returns A `TextExtractionResult` object if a pattern is successfully parsed, otherwise `null`.
  */
 export function parseEmailPatterns(
 	textForCapture: string,

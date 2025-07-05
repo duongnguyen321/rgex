@@ -1,5 +1,5 @@
 {
-	"entryPoints": ["src/index.ts", "T2R-T2V.md"],
+	"entryPoints": ["src/index.ts"],
 	"out": "docs",
 	"name": "RGex - Powerful Regex Builder Platform",
 	"readme": "README.md",
@@ -19,16 +19,106 @@
 		"Functions",
 		"Variables",
 		"Type Aliases",
-		"Interfaces"
+		"Interfaces",
+		"Modules"
 	],
-	"sort": ["source-order"],
+	"sort": ["source-order", "alphabetical"],
+	"searchInComments": true,
+	"searchInDocuments": true,
+	"treatWarningsAsErrors": false,
+	"validation": {
+		"notExported": true,
+		"invalidLink": true,
+		"notDocumented": false
+	},
+	"commentStyle": "jsdoc",
+	"blockTags": [
+		"@alpha",
+		"@beta",
+		"@deprecated",
+		"@example",
+		"@experimental",
+		"@internal",
+		"@override",
+		"@param",
+		"@privateRemarks",
+		"@public",
+		"@readonly",
+		"@remarks",
+		"@returns",
+		"@sealed",
+		"@see",
+		"@since",
+		"@throws",
+		"@typeParam",
+		"@virtual"
+	],
+	"inlineTags": ["@inheritDoc", "@label", "@link", "@linkcode", "@linkplain"],
+	"modifierTags": [
+		"@alpha",
+		"@beta",
+		"@deprecated",
+		"@experimental",
+		"@internal",
+		"@override",
+		"@public",
+		"@readonly",
+		"@sealed",
+		"@virtual"
+	],
 	"navigationLinks": {
 		"GitHub": "https://github.com/duongnguyen321/rgex",
-		"NPM": "https://www.npmjs.com/package/rgex"
+		"NPM": "https://www.npmjs.com/package/rgex",
+		"Documentation": "https://duongnguyen321.github.io/rgex/",
+		"Examples": "https://github.com/duongnguyen321/rgex/tree/main/examples"
 	},
 	"sidebarLinks": {
-		"GitHub Repository": "https://github.com/duongnguyen321/rgex",
-		"NPM Package": "https://www.npmjs.com/package/rgex",
-		"Report Issues": "https://github.com/duongnguyen321/rgex/issues"
+		"🏠 Home": "https://duongnguyen321.github.io/rgex/",
+		"📚 GitHub Repository": "https://github.com/duongnguyen321/rgex",
+		"📦 NPM Package": "https://www.npmjs.com/package/rgex",
+		"🐛 Report Issues": "https://github.com/duongnguyen321/rgex/issues",
+		"💡 Feature Requests": "https://github.com/duongnguyen321/rgex/discussions",
+		"📖 T2R & T2V Guide": "https://github.com/duongnguyen321/rgex/blob/main/T2R-T2V.md"
+	},
+	"customCss": "./docs-template/custom.css",
+	"includeHierarchySummary": true,
+	"kindSortOrder": [
+		"Document",
+		"Project",
+		"Module",
+		"Namespace",
+		"Enum",
+		"EnumMember",
+		"Class",
+		"Interface",
+		"TypeAlias",
+		"Constructor",
+		"Property",
+		"Variable",
+		"Function",
+		"Accessor",
+		"Method",
+		"Parameter",
+		"TypeParameter",
+		"TypeLiteral",
+		"CallSignature",
+		"ConstructorSignature",
+		"IndexSignature",
+		"GetSignature",
+		"SetSignature"
+	],
+	"titleLink": "https://duongnguyen321.github.io/rgex/",
+	"visibilityFilters": {
+		"protected": false,
+		"private": false,
+		"inherited": true,
+		"external": false
+	},
+	"searchCategoryBoosts": {
+		"Classes": 1.5,
+		"Functions": 1.2,
+		"Variables": 1.0,
+		"Type Aliases": 0.8,
+		"Interfaces": 1.1
 	}
 }

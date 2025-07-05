@@ -398,17 +398,57 @@ export const SPECIAL_CHARS = '!@#$%^&*()_+\\-=\\[\\]{};\':"\\\\|,.<>\\/?';
 export const SYMBOLS = '[^\\w\\s]';
 export const UNICODE_RANGE = '[^\\x00-\\x7F]';
 
-// Positional patterns (will be dynamically generated)
+/**
+ * Creates a regex pattern that matches the start of a string.
+ * @param text - The text to match at the beginning.
+ * @returns A regex pattern string.
+ */
 export const STARTS_WITH = (text: string) =>
 	`^${text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`;
+
+/**
+ * Creates a regex pattern that matches the end of a string.
+ * @param text - The text to match at the end.
+ * @returns A regex pattern string.
+ */
 export const ENDS_WITH = (text: string) =>
 	`${text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`;
+
+/**
+ * Creates a regex pattern that matches if a string contains the given text.
+ * @param text - The text to search for within the string.
+ * @returns A regex pattern string.
+ */
 export const CONTAINS = (text: string) =>
 	`.*${text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}.*`;
 
-// Length constraint patterns (will be dynamically generated)
+/**
+ * Creates a regex pattern for an exact length.
+ * @param n - The exact number of characters.
+ * @returns A regex pattern string.
+ */
 export const EXACT_LENGTH = (n: number) => `^.{${n}}$`;
+
+/**
+ * Creates a regex pattern for a minimum length.
+ * @param n - The minimum number of characters.
+ * @returns A regex pattern string.
+ */
 export const MIN_LENGTH = (n: number) => `^.{${n},}$`;
+
+/**
+ * Creates a regex pattern for a maximum length.
+ * @param n - The maximum number of characters.
+ *
+ * @returns A regex pattern string.
+ */
 export const MAX_LENGTH = (n: number) => `^.{0,${n}}$`;
+
+/**
+ * Creates a regex pattern for a length within a given range.
+ * @param min - The minimum number of characters.
+ * @param max - The maximum number of characters.
+ * @returns A regex pattern string.
+ */
 export const BETWEEN_LENGTH = (min: number, max: number) =>
 	`^.{${min},${max}}$`;

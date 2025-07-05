@@ -1,0 +1,710 @@
+/* Custom TypeDoc Styling for RGex - Dracula Theme */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+	/* Dracula Color Palette */
+	--dracula-bg: #282a36;
+	--dracula-current-line: #44475a;
+	--dracula-foreground: #f8f8f2;
+	--dracula-comment: #6272a4;
+	--dracula-cyan: #8be9fd;
+	--dracula-green: #50fa7b;
+	--dracula-orange: #ffb86c;
+	--dracula-pink: #ff79c6;
+	--dracula-purple: #bd93f9;
+	--dracula-red: #ff5555;
+	--dracula-yellow: #f1fa8c;
+}
+
+/* Dark theme (default) */
+[data-theme='dark'],
+:root {
+	--primary-color: #bd93f9;
+	--secondary-color: #8be9fd;
+	--success-color: #50fa7b;
+	--danger-color: #ff5555;
+	--warning-color: #ffb86c;
+	--info-color: #8be9fd;
+	--dark-bg: #282a36;
+	--light-bg: #44475a;
+	--border-color: #6272a4;
+	--text-color: #f8f8f2;
+	--link-color: #8be9fd;
+	--comment-color: #6272a4;
+}
+
+/* Light theme */
+[data-theme='light'] {
+	--primary-color: #7c3aed;
+	--secondary-color: #0891b2;
+	--success-color: #059669;
+	--danger-color: #dc2626;
+	--warning-color: #d97706;
+	--info-color: #0891b2;
+	--dark-bg: #ffffff;
+	--light-bg: #f8fafc;
+	--border-color: #e2e8f0;
+	--text-color: #1e293b;
+	--link-color: #0891b2;
+	--comment-color: #64748b;
+}
+
+/* Global body styling */
+body {
+	background-color: var(--dark-bg) !important;
+	color: var(--text-color) !important;
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		sans-serif !important;
+}
+
+/* Code font styling */
+pre,
+code,
+.tsd-signature,
+.hljs {
+	font-family: 'Fira Code', 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata',
+		'Roboto Mono', monospace !important;
+	font-feature-settings: 'calt' 1, 'liga' 1; /* Enable ligatures */
+	font-variant-ligatures: common-ligatures;
+}
+
+/* Enhanced navigation */
+.tsd-navigation a {
+	transition: all 0.2s ease;
+	border-radius: 4px;
+	padding: 4px 8px;
+	color: var(--text-color) !important;
+}
+
+.tsd-navigation a:hover {
+	background-color: var(--primary-color);
+	color: var(--dark-bg) !important;
+	transform: translateX(2px);
+}
+
+/* Beautiful code blocks */
+.tsd-panel pre {
+	background: var(--light-bg) !important;
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	padding: 16px;
+	overflow-x: auto;
+	color: var(--text-color) !important;
+}
+
+.tsd-panel code {
+	background: var(--light-bg) !important;
+	color: var(--primary-color) !important;
+	padding: 2px 4px;
+	border-radius: 3px;
+	font-family: 'Fira Code', 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata',
+		'Roboto Mono', monospace !important;
+	/* border: 1px solid var(--border-color); */
+	font-feature-settings: 'calt' 1, 'liga' 1;
+	font-variant-ligatures: common-ligatures;
+}
+
+/* Enhanced function signatures */
+.tsd-signature {
+	background: var(--light-bg) !important;
+	color: var(--secondary-color) !important;
+	border: 1px solid var(--primary-color);
+	border-radius: 6px;
+	padding: 12px;
+	margin: 8px 0;
+	box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
+}
+
+[data-theme='dark'] .tsd-signature {
+	box-shadow: 0 2px 8px rgba(189, 147, 249, 0.2);
+}
+
+.tsd-signature-type {
+	color: var(--warning-color) !important;
+	font-weight: 500;
+}
+
+/* Better parameter styling */
+.tsd-parameters {
+	background: var(--light-bg) !important;
+	border-radius: 6px;
+	padding: 12px;
+	margin: 8px 0;
+	border-left: 4px solid var(--primary-color);
+	color: var(--text-color) !important;
+}
+
+.tsd-parameter-list {
+	margin: 0;
+	padding: 0;
+}
+
+.tsd-parameter {
+	margin: 8px 0;
+	padding: 8px;
+	background: var(--dark-bg) !important;
+	border-radius: 4px;
+	border: 1px solid var(--border-color);
+	color: var(--text-color) !important;
+}
+
+/* Enhanced examples */
+.tsd-comment .tsd-example {
+	background: var(--light-bg) !important;
+	color: var(--success-color) !important;
+	padding: 16px;
+	border-radius: 8px;
+	margin: 12px 0;
+	box-shadow: 0 4px 8px rgba(5, 150, 105, 0.1);
+	border: 1px solid var(--success-color);
+}
+
+[data-theme='dark'] .tsd-comment .tsd-example {
+	box-shadow: 0 4px 8px rgba(80, 250, 123, 0.1);
+}
+
+.tsd-comment .tsd-example h4 {
+	color: var(--success-color) !important;
+	margin-top: 0;
+	font-size: 1.1em;
+	font-weight: 600;
+}
+
+/* Better member styling */
+.tsd-member {
+	border-left: 4px solid transparent;
+	padding-left: 16px;
+	margin: 16px 0;
+	transition: all 0.2s ease;
+}
+
+.tsd-member:hover {
+	border-left-color: var(--primary-color);
+	background: rgba(0, 122, 204, 0.02);
+}
+
+/* Enhanced headers */
+.tsd-page-title {
+	background: var(--light-bg) !important;
+	color: var(--primary-color) !important;
+	padding: 24px;
+	border-radius: 8px;
+	margin-bottom: 24px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	border: 1px solid var(--primary-color);
+}
+
+[data-theme='dark'] .tsd-page-title {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tsd-page-title h1 {
+	margin: 0;
+	font-size: 2.5em;
+	font-weight: 700;
+	color: var(--primary-color) !important;
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		sans-serif !important;
+	letter-spacing: -0.05em;
+}
+
+/* Function cards */
+.tsd-kind-function {
+	background: var(--light-bg) !important;
+	border: 1px solid var(--secondary-color);
+	border-radius: 8px;
+	padding: 16px;
+	margin: 16px 0;
+	box-shadow: 0 2px 8px rgba(8, 145, 178, 0.1);
+	transition: all 0.2s ease;
+	color: var(--text-color) !important;
+}
+
+[data-theme='dark'] .tsd-kind-function {
+	box-shadow: 0 2px 8px rgba(139, 233, 253, 0.1);
+}
+
+.tsd-kind-function:hover {
+	box-shadow: 0 4px 12px rgba(8, 145, 178, 0.2);
+	transform: translateY(-2px);
+	border-color: var(--secondary-color);
+}
+
+[data-theme='dark'] .tsd-kind-function:hover {
+	box-shadow: 0 4px 12px rgba(139, 233, 253, 0.2);
+}
+
+/* Class styling */
+.tsd-kind-class {
+	background: var(--light-bg) !important;
+	color: var(--warning-color) !important;
+	border: 1px solid var(--warning-color);
+	border-radius: 8px;
+	padding: 16px;
+	margin: 16px 0;
+	box-shadow: 0 4px 8px rgba(217, 119, 6, 0.1);
+}
+
+[data-theme='dark'] .tsd-kind-class {
+	box-shadow: 0 4px 8px rgba(255, 184, 108, 0.1);
+}
+
+.tsd-kind-class h3 {
+	color: var(--warning-color) !important;
+	margin-top: 0;
+}
+
+/* Interface styling */
+.tsd-kind-interface {
+	background: var(--light-bg) !important;
+	/* border: 1px solid var(--primary-color); */
+	border-radius: 8px;
+	padding: 8px;
+	margin: 16px 0;
+	margin-bottom: 8px;
+	box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1);
+	color: var(--primary-color) !important;
+	text-decoration: underline;
+}
+
+[data-theme='dark'] .tsd-kind-interface {
+	box-shadow: 0 2px 8px rgba(189, 147, 249, 0.1);
+}
+
+/* Variable styling */
+.tsd-kind-variable {
+	background: var(--light-bg) !important;
+	border: 1px solid var(--warning-color);
+	border-radius: 8px;
+	padding: 16px;
+	margin: 16px 0;
+	box-shadow: 0 2px 8px rgba(217, 119, 6, 0.1);
+	color: var(--warning-color) !important;
+}
+
+[data-theme='dark'] .tsd-kind-variable {
+	box-shadow: 0 2px 8px rgba(241, 250, 140, 0.1);
+}
+
+/* Type alias styling */
+.tsd-kind-type-alias {
+	background: var(--light-bg) !important;
+	color: var(--secondary-color) !important;
+	border: 1px solid var(--secondary-color);
+	border-radius: 8px;
+	padding: 16px;
+	margin: 16px 0;
+	box-shadow: 0 2px 8px rgba(8, 145, 178, 0.1);
+}
+
+[data-theme='dark'] .tsd-kind-type-alias {
+	box-shadow: 0 2px 8px rgba(139, 233, 253, 0.1);
+}
+
+.tsd-kind-type-alias h3 {
+	color: var(--secondary-color) !important;
+	margin-top: 0;
+}
+
+/* Enhanced search */
+.tsd-search input {
+	background: var(--light-bg) !important;
+	color: var(--text-color) !important;
+	border: 2px solid var(--border-color);
+	border-radius: 20px;
+	padding: 8px 16px;
+	transition: all 0.2s ease;
+}
+
+.tsd-search input:focus {
+	border-color: var(--primary-color);
+	box-shadow: 0 0 0 3px rgba(189, 147, 249, 0.2);
+	outline: none;
+}
+
+.tsd-search input::placeholder {
+	color: var(--border-color) !important;
+}
+
+/* Better tables */
+.tsd-panel table {
+	border-collapse: collapse;
+	width: 100%;
+	margin: 16px 0;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	border-radius: 6px;
+	overflow: hidden;
+	background: var(--light-bg) !important;
+}
+
+.tsd-panel table th {
+	background: var(--primary-color) !important;
+	color: var(--dark-bg) !important;
+	padding: 12px;
+	font-weight: 600;
+}
+
+.tsd-panel table td {
+	padding: 12px;
+	border-bottom: 1px solid var(--border-color);
+	background: var(--light-bg) !important;
+	color: var(--text-color) !important;
+}
+
+.tsd-panel table tr:hover {
+	background: var(--dark-bg) !important;
+}
+
+.tsd-panel table tr:hover td {
+	background: var(--dark-bg) !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+	.tsd-page-title h1 {
+		font-size: 2em;
+	}
+
+	.tsd-panel pre {
+		padding: 12px;
+		font-size: 0.9em;
+	}
+
+	.tsd-signature {
+		padding: 8px;
+		font-size: 0.9em;
+	}
+}
+
+/* Additional Dracula styling */
+.tsd-panel {
+	background: var(--dark-bg) !important;
+	color: var(--text-color) !important;
+}
+
+.tsd-panel h1,
+.tsd-panel h2,
+.tsd-panel h3,
+.tsd-panel h4,
+.tsd-panel h5,
+.tsd-panel h6 {
+	color: var(--primary-color) !important;
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		sans-serif !important;
+	font-weight: 600;
+	letter-spacing: -0.025em;
+}
+
+.tsd-panel a {
+	color: var(--link-color) !important;
+}
+
+.tsd-panel a:hover {
+	color: var(--primary-color) !important;
+}
+
+.tsd-comment {
+	color: var(--comment-color) !important;
+}
+
+.tsd-typography {
+	color: var(--text-color) !important;
+}
+
+/* Remove default dark mode overrides since we're always dark */
+@media (prefers-color-scheme: dark) {
+	/* Keep our Dracula theme consistent */
+}
+
+/* Animations */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.tsd-member {
+	animation: fadeIn 0.3s ease;
+}
+
+/* Custom badges */
+.tsd-flag {
+	border-radius: 12px;
+	padding: 2px 8px;
+	font-size: 0.8em;
+	font-weight: 500;
+	margin-left: 8px;
+}
+
+.tsd-flag.ts-flagOptional {
+	background: var(--info-color);
+	color: white;
+}
+
+.tsd-flag.ts-flagReadonly {
+	background: var(--success-color);
+	color: white;
+}
+
+.tsd-flag.ts-flagPrivate {
+	background: var(--danger-color);
+	color: white;
+}
+
+.tsd-flag.ts-flagProtected {
+	background: var(--warning-color);
+	color: white;
+}
+
+/* Enhanced sidebar */
+.tsd-navigation {
+	background: var(--light-bg) !important;
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	padding: 16px;
+	margin: 16px 0;
+}
+
+.tsd-navigation a {
+	color: var(--text-color) !important;
+	text-decoration: none;
+	display: block;
+	padding: 8px 12px;
+	border-radius: 4px;
+	margin: 2px 0;
+	transition: all 0.2s ease;
+}
+
+.tsd-navigation a:hover {
+	background: var(--primary-color) !important;
+	color: var(--dark-bg) !important;
+	transform: translateX(4px);
+}
+
+.tsd-navigation .current {
+	background: var(--secondary-color) !important;
+	color: var(--dark-bg) !important;
+	font-weight: 600;
+}
+
+/* Footer styling */
+.tsd-generator {
+	background: var(--light-bg) !important;
+	color: var(--dracula-comment) !important;
+	border: 1px solid var(--border-color);
+	padding: 16px;
+	border-radius: 8px;
+	margin-top: 32px;
+	text-align: center;
+}
+
+.tsd-generator p {
+	margin: 0;
+	font-size: 0.9em;
+	color: var(--dracula-comment) !important;
+}
+
+/* Toolbar styling */
+.tsd-page-toolbar {
+	background: var(--dark-bg) !important;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.tsd-toolbar-contents {
+	background: var(--dark-bg) !important;
+}
+
+.tsd-toolbar-contents a {
+	color: var(--link-color) !important;
+}
+
+.tsd-toolbar-contents a:hover {
+	color: var(--primary-color) !important;
+}
+
+/* Container styling */
+.container {
+	background: var(--dark-bg) !important;
+}
+
+/* Breadcrumb styling */
+.tsd-breadcrumb {
+	background: var(--light-bg) !important;
+	/* border: 1px solid var(--border-color); */
+	color: var(--text-color) !important;
+}
+
+.tsd-breadcrumb a {
+	color: var(--link-color) !important;
+}
+
+/* Syntax highlighting for code blocks */
+.hljs {
+	background: var(--light-bg) !important;
+	color: var(--text-color) !important;
+}
+
+.hljs-keyword {
+	color: var(--dracula-pink) !important;
+}
+
+.hljs-string {
+	color: var(--dracula-yellow) !important;
+}
+
+.hljs-number {
+	color: var(--dracula-purple) !important;
+}
+
+.hljs-comment {
+	color: var(--dracula-comment) !important;
+}
+
+.hljs-function {
+	color: var(--dracula-green) !important;
+}
+
+.hljs-variable {
+	color: var(--dracula-cyan) !important;
+}
+
+.hljs-type {
+	color: var(--dracula-orange) !important;
+}
+
+/* Menu and dropdown styling */
+.tsd-widget.menu {
+	background: var(--light-bg) !important;
+	border: 1px solid var(--border-color);
+	color: var(--text-color) !important;
+}
+
+/* Search results styling */
+#tsd-search-results {
+	background: var(--light-bg) !important;
+	border: 1px solid var(--border-color);
+	color: var(--text-color) !important;
+}
+
+#tsd-search-results li {
+	background: var(--light-bg) !important;
+	color: var(--text-color) !important;
+}
+
+#tsd-search-results li:hover {
+	background: var(--primary-color) !important;
+	color: var(--dark-bg) !important;
+}
+
+/* Member list styling */
+.tsd-index-list {
+	background: var(--light-bg) !important;
+	border: 1px solid var(--border-color);
+}
+
+.tsd-index-list a {
+	color: var(--link-color) !important;
+}
+
+.tsd-index-list a:hover {
+	background: var(--primary-color) !important;
+	color: var(--dark-bg) !important;
+}
+
+/* Accordion styling */
+.tsd-accordion-summary {
+	background: var(--light-bg) !important;
+	/* border: 1px solid var(--border-color); */
+	color: var(--text-color) !important;
+}
+
+.tsd-accordion-summary:hover {
+	background: var(--primary-color) !important;
+	color: var(--dark-bg) !important;
+}
+
+/* Custom scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--border-color);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--primary-color);
+}
+
+/* Selection styling */
+::selection {
+	background: var(--primary-color);
+	color: var(--dark-bg);
+}
+
+::-moz-selection {
+	background: var(--primary-color);
+	color: var(--dark-bg);
+}
+
+/* Focus styles */
+*:focus {
+	outline: 2px solid var(--primary-color);
+	outline-offset: 2px;
+}
+
+/* Theme logo/brand styling */
+.title {
+	color: var(--primary-color) !important;
+	font-weight: 600;
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		sans-serif !important;
+	letter-spacing: -0.025em;
+}
+
+.title:hover {
+	color: var(--secondary-color) !important;
+}
+
+/* Additional typography improvements */
+.tsd-typography {
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		sans-serif !important;
+	line-height: 1.6;
+}
+
+.tsd-typography p,
+.tsd-typography li {
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		sans-serif !important;
+	line-height: 1.6;
+}
+
+/* Button and input improvements */
+button,
+input {
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		sans-serif !important;
+}
+
+/* Navigation improvements */
+.tsd-navigation {
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		sans-serif !important;
+}

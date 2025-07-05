@@ -7,7 +7,15 @@ import type { TextExtractionResult } from '../../types/index.js';
 import { calculateConfidence } from './helpers.js';
 
 /**
- * Parse security-related patterns (passwords, etc.)
+ * Parses text for security-related patterns and returns a corresponding regex.
+ *
+ * It understands phrases like:
+ * - "password no dictionary words"
+ * - "strong password 8 characters"
+ *
+ * @param textForCapture The text to parse for security patterns.
+ * @param testValue Optional string to test the generated regex against for confidence scoring.
+ * @returns A `TextExtractionResult` object if a pattern is found, otherwise `null`.
  */
 export function parseSecurityPatterns(
 	textForCapture: string,

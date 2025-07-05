@@ -7,7 +7,15 @@ import type { TextExtractionResult } from '../../types/index.js';
 import { calculateConfidence } from './helpers.js';
 
 /**
- * Parse URL-related patterns
+ * Parses text for URL patterns and returns a corresponding regex.
+ *
+ * It understands phrases like:
+ * - "url with https"
+ * - "url without query"
+ *
+ * @param textForCapture The text to parse for URL patterns.
+ * @param testValue Optional string to test the generated regex against for confidence scoring.
+ * @returns A `TextExtractionResult` object if a pattern is found, otherwise `null`.
  */
 export function parseUrlPatterns(
 	textForCapture: string,

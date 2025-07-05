@@ -7,7 +7,16 @@ import type { TextExtractionResult } from '../../types/index.js';
 import { calculateConfidence } from './helpers.js';
 
 /**
- * Parse phone-related patterns
+ * Parses text for phone number patterns and returns a corresponding regex.
+ *
+ * It understands phrases like:
+ * - "us phone number"
+ * - "phone with dashes"
+ * - "phone with country code" / "international phone"
+ *
+ * @param textForCapture The text to parse for phone number patterns.
+ * @param testValue Optional string to test the generated regex against for confidence scoring.
+ * @returns A `TextExtractionResult` object if a pattern is found, otherwise `null`.
  */
 export function parsePhonePatterns(
 	textForCapture: string,

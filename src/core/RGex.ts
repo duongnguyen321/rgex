@@ -1,6 +1,7 @@
 /**
- * RGex Core Class
- * Main regex builder with fluent API and AI-powered features
+ * @class RGex
+ * @classdesc The main class for building and manipulating regular expressions using a fluent, chainable API.
+ * It also provides static methods for AI-powered text-to-regex and validation rule generation.
  */
 
 import type {
@@ -34,27 +35,41 @@ export class RGex {
 	private pattern: string = '';
 	private options: RegexBuilderOptions = {};
 
+	/**
+	 * Initializes a new instance of the RGex class.
+	 * @param pattern - The initial regex pattern string.
+	 * @param options - The initial regex options.
+	 */
 	constructor(pattern: string = '', options: RegexBuilderOptions = {}) {
 		this.pattern = pattern;
 		this.options = { ...RGEX_CONFIG.defaults.flags, ...options };
 	}
 
 	/**
-	 * Create a new RGex instance
+	 * Creates a new RGex instance, providing a static entry point to the fluent API.
+	 * @param pattern - The initial regex pattern.
+	 * @param options - The regex options.
+	 * @returns A new RGex instance.
 	 */
 	static create(pattern: string = '', options: RegexBuilderOptions = {}): RGex {
 		return new RGex(pattern, options);
 	}
 
 	/**
-	 * Convert human text to regex pattern (Static method)
+	 * Converts a human-readable text description into a regex pattern.
+	 * @param humanText - The natural language description of the pattern.
+	 * @param testValue - An optional string to test the generated pattern against.
+	 * @returns A result object containing the pattern and analysis.
 	 */
 	static toRegex(humanText: string, testValue?: string): TextExtractionResult {
 		return parseHumanTextToRegex(humanText, testValue);
 	}
 
 	/**
-	 * Convert human text to validation rules (Static method)
+	 * Converts a human-readable text description into a set of validation rules.
+	 * @param humanText - The natural language description of the validation rules.
+	 * @param testValue - An optional string to test the generated rules against.
+	 * @returns A result object containing the validation rules.
 	 */
 	static toValidate(
 		humanText: string,
@@ -64,14 +79,19 @@ export class RGex {
 	}
 
 	/**
-	 * Get pattern suggestions for human text
+	 * Gets pattern suggestions based on a human-readable text input.
+	 * @param text - The input text to get suggestions for.
+	 * @returns An array of suggested pattern keywords.
 	 */
 	static getSuggestions(text: string): string[] {
 		return getPatternSuggestions(text);
 	}
 
 	/**
-	 * Create RGex instance from human text description (Static method)
+	 * Creates a new RGex instance from a human-readable text description.
+	 * @param humanText - The natural language description of the pattern.
+	 * @param testValue - An optional string to test the generated pattern against.
+	 * @returns A new RGex instance.
 	 */
 	static humanText(humanText: string, testValue?: string): RGex {
 		const result = parseHumanTextToRegex(humanText, testValue);
@@ -92,7 +112,10 @@ export class RGex {
 	}
 
 	/**
-	 * Replace current pattern with human text description (Instance method)
+	 * Replaces the current pattern with one generated from a human-readable text description.
+	 * @param humanText - The natural language description of the pattern.
+	 * @param testValue - An optional string to test the generated pattern against.
+	 * @returns The current RGex instance for chaining.
 	 */
 	humanText(humanText: string, testValue?: string): RGex {
 		const result = parseHumanTextToRegex(humanText, testValue);
@@ -111,7 +134,9 @@ export class RGex {
 	// Builder Methods
 
 	/**
-	 * Add literal text (escaped)
+	 * Appends a literal string to the pattern, escaping special regex characters.
+	 * @param text - The literal string to append.
+	 * @returns The current RGex instance for chaining.
 	 */
 	literal(text: string): RGex {
 		this.pattern += escapeRegex(text);
@@ -119,7 +144,9 @@ export class RGex {
 	}
 
 	/**
-	 * Add raw regex pattern
+	 * Appends a raw (unescaped) regex pattern string.
+	 * @param pattern - The raw pattern string to append.
+	 * @returns The current RGex instance for chaining.
 	 */
 	raw(pattern: string): RGex {
 		this.pattern += pattern;
@@ -127,7 +154,10 @@ export class RGex {
 	}
 
 	/**
-	 * Add character class
+	 * Appends a character class to the pattern.
+	 * @param chars - The characters to include in the class.
+	 * @param negate - If true, creates a negated character class.
+	 * @returns The current RGex instance for chaining.
 	 */
 	charClass(chars: string, negate: boolean = false): RGex {
 		const escaped = chars.replace(/[\]\\^-]/g, '\\$&');
@@ -136,7 +166,8 @@ export class RGex {
 	}
 
 	/**
-	 * Add digit pattern
+	 * Appends a digit character class (\\d).
+	 * @returns The current RGex instance for chaining.
 	 */
 	digit(): RGex {
 		this.pattern += '\\d';
@@ -144,7 +175,8 @@ export class RGex {
 	}
 
 	/**
-	 * Add word character pattern
+	 * Appends a word character class (\\w).
+	 * @returns The current RGex instance for chaining.
 	 */
 	word(): RGex {
 		this.pattern += '\\w';
@@ -152,7 +184,8 @@ export class RGex {
 	}
 
 	/**
-	 * Add whitespace pattern
+	 * Appends a whitespace character class (\\s).
+	 * @returns The current RGex instance for chaining.
 	 */
 	whitespace(): RGex {
 		this.pattern += '\\s';
@@ -160,7 +193,8 @@ export class RGex {
 	}
 
 	/**
-	 * Add any character pattern
+	 * Appends an "any character" pattern (.).
+	 * @returns The current RGex instance for chaining.
 	 */
 	any(): RGex {
 		this.pattern += '.';
@@ -168,7 +202,8 @@ export class RGex {
 	}
 
 	/**
-	 * Add start anchor
+	 * Adds a start-of-string anchor (^) to the beginning of the pattern.
+	 * @returns The current RGex instance for chaining.
 	 */
 	start(): RGex {
 		if (!this.pattern.startsWith('^')) {
@@ -178,7 +213,8 @@ export class RGex {
 	}
 
 	/**
-	 * Add end anchor
+	 * Adds an end-of-string anchor ($) to the end of the pattern.
+	 * @returns The current RGex instance for chaining.
 	 */
 	end(): RGex {
 		if (!this.pattern.endsWith('$')) {
@@ -188,7 +224,9 @@ export class RGex {
 	}
 
 	/**
-	 * Add OR operator
+	 * Appends an OR operator (|) followed by another pattern.
+	 * @param pattern - The alternative pattern.
+	 * @returns The current RGex instance for chaining.
 	 */
 	or(pattern: string): RGex {
 		this.pattern += `|${pattern}`;
@@ -196,7 +234,10 @@ export class RGex {
 	}
 
 	/**
-	 * Add quantifiers
+	 * Appends a quantifier to the preceding element.
+	 * @param min - The minimum number of repetitions.
+	 * @param max - The maximum number of repetitions. Use Infinity for no upper limit.
+	 * @returns The current RGex instance for chaining.
 	 */
 	quantifier(min: number, max?: number): RGex {
 		if (max === undefined) {
@@ -210,7 +251,8 @@ export class RGex {
 	}
 
 	/**
-	 * Zero or more
+	 * Appends a zero-or-more quantifier (*).
+	 * @returns The current RGex instance for chaining.
 	 */
 	zeroOrMore(): RGex {
 		this.pattern += '*';
@@ -218,7 +260,8 @@ export class RGex {
 	}
 
 	/**
-	 * One or more
+	 * Appends a one-or-more quantifier (+).
+	 * @returns The current RGex instance for chaining.
 	 */
 	oneOrMore(): RGex {
 		this.pattern += '+';
@@ -226,7 +269,8 @@ export class RGex {
 	}
 
 	/**
-	 * Zero or one (optional)
+	 * Appends a zero-or-one quantifier (?).
+	 * @returns The current RGex instance for chaining.
 	 */
 	optional(): RGex {
 		this.pattern += '?';
@@ -234,7 +278,9 @@ export class RGex {
 	}
 
 	/**
-	 * Add group (capturing)
+	 * Wraps a pattern in a capturing group.
+	 * @param pattern - The pattern to group.
+	 * @returns The current RGex instance for chaining.
 	 */
 	group(pattern: string): RGex {
 		this.pattern += `(${pattern})`;
@@ -242,7 +288,9 @@ export class RGex {
 	}
 
 	/**
-	 * Add non-capturing group
+	 * Wraps a pattern in a non-capturing group.
+	 * @param pattern - The pattern to group.
+	 * @returns The current RGex instance for chaining.
 	 */
 	nonCapturingGroup(pattern: string): RGex {
 		this.pattern += `(?:${pattern})`;
@@ -250,7 +298,10 @@ export class RGex {
 	}
 
 	/**
-	 * Add lookahead
+	 * Appends a lookahead assertion.
+	 * @param pattern - The pattern for the lookahead.
+	 * @param negative - If true, creates a negative lookahead.
+	 * @returns The current RGex instance for chaining.
 	 */
 	lookahead(pattern: string, negative: boolean = false): RGex {
 		this.pattern += negative ? `(?!${pattern})` : `(?=${pattern})`;
@@ -258,7 +309,10 @@ export class RGex {
 	}
 
 	/**
-	 * Add lookbehind
+	 * Appends a lookbehind assertion.
+	 * @param pattern - The pattern for the lookbehind.
+	 * @param negative - If true, creates a negative lookbehind.
+	 * @returns The current RGex instance for chaining.
 	 */
 	lookbehind(pattern: string, negative: boolean = false): RGex {
 		this.pattern += negative ? `(?<!${pattern})` : `(?<=${pattern})`;
@@ -268,7 +322,8 @@ export class RGex {
 	// Pre-built patterns
 
 	/**
-	 * Email pattern
+	 * Appends a pre-built email validation pattern.
+	 * @returns The current RGex instance for chaining.
 	 */
 	email(): RGex {
 		this.pattern += REGEX_PATTERNS.EMAIL;
@@ -276,7 +331,8 @@ export class RGex {
 	}
 
 	/**
-	 * URL pattern
+	 * Appends a pre-built URL validation pattern.
+	 * @returns The current RGex instance for chaining.
 	 */
 	url(): RGex {
 		this.pattern += REGEX_PATTERNS.URL;
@@ -284,7 +340,8 @@ export class RGex {
 	}
 
 	/**
-	 * Phone pattern
+	 * Appends a pre-built phone number validation pattern.
+	 * @returns The current RGex instance for chaining.
 	 */
 	phone(): RGex {
 		this.pattern += REGEX_PATTERNS.PHONE;
@@ -292,7 +349,8 @@ export class RGex {
 	}
 
 	/**
-	 * Date pattern (YYYY-MM-DD)
+	 * Appends a pre-built date (YYYY-MM-DD) validation pattern.
+	 * @returns The current RGex instance for chaining.
 	 */
 	date(): RGex {
 		this.pattern += REGEX_PATTERNS.DATE;
@@ -300,7 +358,8 @@ export class RGex {
 	}
 
 	/**
-	 * Time pattern (HH:MM or HH:MM:SS)
+	 * Appends a pre-built time (HH:MM or HH:MM:SS) validation pattern.
+	 * @returns The current RGex instance for chaining.
 	 */
 	time(): RGex {
 		this.pattern += REGEX_PATTERNS.TIME;
@@ -308,7 +367,8 @@ export class RGex {
 	}
 
 	/**
-	 * Number pattern (integer or decimal)
+	 * Appends a pre-built number (integer or decimal) validation pattern.
+	 * @returns The current RGex instance for chaining.
 	 */
 	number(): RGex {
 		this.pattern += REGEX_PATTERNS.DECIMAL;
@@ -316,7 +376,8 @@ export class RGex {
 	}
 
 	/**
-	 * UUID pattern
+	 * Appends a pre-built UUID validation pattern.
+	 * @returns The current RGex instance for chaining.
 	 */
 	uuid(): RGex {
 		this.pattern += REGEX_PATTERNS.UUID;
@@ -324,7 +385,8 @@ export class RGex {
 	}
 
 	/**
-	 * IPv4 pattern
+	 * Appends a pre-built IPv4 validation pattern.
+	 * @returns The current RGex instance for chaining.
 	 */
 	ipv4(): RGex {
 		this.pattern += REGEX_PATTERNS.IPV4;
@@ -332,7 +394,8 @@ export class RGex {
 	}
 
 	/**
-	 * Hex color pattern
+	 * Appends a pre-built hex color code validation pattern.
+	 * @returns The current RGex instance for chaining.
 	 */
 	hexColor(): RGex {
 		this.pattern += REGEX_PATTERNS.HEX_COLOR;
@@ -342,7 +405,9 @@ export class RGex {
 	// Options and flags
 
 	/**
-	 * Set global flag
+	 * Enables or disables the global (g) flag.
+	 * @param enabled - If true, the flag is enabled.
+	 * @returns The current RGex instance for chaining.
 	 */
 	global(enabled: boolean = true): RGex {
 		this.options.global = enabled;
@@ -350,7 +415,9 @@ export class RGex {
 	}
 
 	/**
-	 * Set case insensitive flag
+	 * Enables or disables the ignore case (i) flag.
+	 * @param enabled - If true, the flag is enabled.
+	 * @returns The current RGex instance for chaining.
 	 */
 	ignoreCase(enabled: boolean = true): RGex {
 		this.options.ignoreCase = enabled;
@@ -358,7 +425,9 @@ export class RGex {
 	}
 
 	/**
-	 * Set multiline flag
+	 * Enables or disables the multiline (m) flag.
+	 * @param enabled - If true, the flag is enabled.
+	 * @returns The current RGex instance for chaining.
 	 */
 	multiline(enabled: boolean = true): RGex {
 		this.options.multiline = enabled;
@@ -366,7 +435,9 @@ export class RGex {
 	}
 
 	/**
-	 * Set dotAll flag
+	 * Enables or disables the dotAll (s) flag.
+	 * @param enabled - If true, the flag is enabled.
+	 * @returns The current RGex instance for chaining.
 	 */
 	dotAll(enabled: boolean = true): RGex {
 		this.options.dotAll = enabled;
@@ -374,7 +445,9 @@ export class RGex {
 	}
 
 	/**
-	 * Set unicode flag
+	 * Enables or disables the unicode (u) flag.
+	 * @param enabled - If true, the flag is enabled.
+	 * @returns The current RGex instance for chaining.
 	 */
 	unicode(enabled: boolean = true): RGex {
 		this.options.unicode = enabled;
@@ -382,7 +455,9 @@ export class RGex {
 	}
 
 	/**
-	 * Set sticky flag
+	 * Enables or disables the sticky (y) flag.
+	 * @param enabled - If true, the flag is enabled.
+	 * @returns The current RGex instance for chaining.
 	 */
 	sticky(enabled: boolean = true): RGex {
 		this.options.sticky = enabled;
@@ -392,7 +467,9 @@ export class RGex {
 	// Password validation method
 
 	/**
-	 * Advanced password validation with comprehensive analysis
+	 * Performs advanced password validation using the current pattern as the password to test.
+	 * @param options - The password validation criteria.
+	 * @returns A result object with detailed analysis of the password's strength.
 	 */
 	passwordCase(
 		options: PasswordValidationOptions = {}
@@ -405,7 +482,9 @@ export class RGex {
 	// Utility methods
 
 	/**
-	 * Test the pattern against a string
+	 * Tests if the generated regex pattern matches a given string.
+	 * @param input - The string to test.
+	 * @returns True if the pattern matches, otherwise false.
 	 */
 	test(input: string): boolean {
 		try {
@@ -417,7 +496,9 @@ export class RGex {
 	}
 
 	/**
-	 * Execute the pattern against a string
+	 * Executes the regex pattern against a string and returns the match details.
+	 * @param input - The string to execute the pattern on.
+	 * @returns A `RegExpExecArray` if a match is found, otherwise null.
 	 */
 	exec(input: string): RegExpExecArray | null {
 		try {
@@ -429,7 +510,9 @@ export class RGex {
 	}
 
 	/**
-	 * Find all matches
+	 * Finds all matches of the pattern in a string.
+	 * @param input - The string to search.
+	 * @returns An array of matches, or null if no matches are found.
 	 */
 	match(input: string): string[] | null {
 		try {
@@ -441,7 +524,10 @@ export class RGex {
 	}
 
 	/**
-	 * Replace matches
+	 * Replaces occurrences of the pattern in a string.
+	 * @param input - The string to perform the replacement on.
+	 * @param replacement - The string or function to use for replacement.
+	 * @returns The modified string.
 	 */
 	replace(
 		input: string,
@@ -456,7 +542,9 @@ export class RGex {
 	}
 
 	/**
-	 * Split string by pattern
+	 * Splits a string using the regex pattern as a delimiter.
+	 * @param input - The string to split.
+	 * @returns An array of strings.
 	 */
 	split(input: string): string[] {
 		try {
@@ -468,28 +556,32 @@ export class RGex {
 	}
 
 	/**
-	 * Check if pattern is valid
+	 * Checks if the current regex pattern is syntactically valid.
+	 * @returns True if the pattern is valid, otherwise false.
 	 */
 	isValid(): boolean {
 		return isValidRegex(this.pattern);
 	}
 
 	/**
-	 * Get the pattern string
+	 * Gets the raw regex pattern string.
+	 * @returns The pattern string.
 	 */
 	getPattern(): string {
 		return this.pattern;
 	}
 
 	/**
-	 * Get the flags string
+	 * Gets the flags string (e.g., "gi").
+	 * @returns The flags string.
 	 */
 	getFlags(): string {
 		return optionsToFlags(this.options);
 	}
 
 	/**
-	 * Build the final RegExp object
+	 * Builds and returns the final `RegExp` object.
+	 * @returns A `RegExp` object.
 	 */
 	build(): RegExp {
 		const flags = optionsToFlags(this.options);
@@ -497,14 +589,16 @@ export class RGex {
 	}
 
 	/**
-	 * Clone the current instance
+	 * Creates a new RGex instance with the same pattern and options.
+	 * @returns A new RGex instance.
 	 */
 	clone(): RGex {
 		return new RGex(this.pattern, { ...this.options });
 	}
 
 	/**
-	 * Reset the pattern and options
+	 * Resets the pattern and options to their initial state.
+	 * @returns The current RGex instance for chaining.
 	 */
 	reset(): RGex {
 		this.pattern = '';
@@ -513,7 +607,8 @@ export class RGex {
 	}
 
 	/**
-	 * Convert to string representation
+	 * Returns the string representation of the regex pattern.
+	 * @returns The pattern string.
 	 */
 	toString(): string {
 		const flags = optionsToFlags(this.options);
@@ -521,7 +616,8 @@ export class RGex {
 	}
 
 	/**
-	 * Convert to JSON representation
+	 * Returns a JSON representation of the RGex instance.
+	 * @returns An object containing the pattern, flags, and validity.
 	 */
 	toJSON(): { pattern: string; flags: string; valid: boolean } {
 		return {
@@ -532,57 +628,57 @@ export class RGex {
 	}
 
 	/**
-	 * Create from JSON representation
+	 * Creates a new RGex instance from a JSON object.
+	 * @param json - An object containing the pattern and optional flags.
+	 * @returns A new RGex instance.
+	 * @throws Will throw an error if the pattern in the JSON is invalid.
 	 */
 	static fromJSON(json: { pattern: string; flags?: string }): RGex {
-		const rgex = new RGex(json.pattern);
-
-		if (json.flags) {
-			for (const flag of json.flags) {
-				switch (flag) {
-					case 'g':
-						rgex.global();
-						break;
-					case 'i':
-						rgex.ignoreCase();
-						break;
-					case 'm':
-						rgex.multiline();
-						break;
-					case 's':
-						rgex.dotAll();
-						break;
-					case 'u':
-						rgex.unicode();
-						break;
-					case 'y':
-						rgex.sticky();
-						break;
-				}
-			}
+		if (!json || typeof json.pattern !== 'string') {
+			throw new Error('Invalid JSON object provided for RGex.fromJSON');
 		}
 
-		return rgex;
+		if (!isValidRegex(json.pattern)) {
+			throw new Error(`Invalid regex pattern provided: ${json.pattern}`);
+		}
+
+		const options: RegexBuilderOptions = {};
+		if (json.flags) {
+			if (json.flags.includes('g')) options.global = true;
+			if (json.flags.includes('i')) options.ignoreCase = true;
+			if (json.flags.includes('m')) options.multiline = true;
+			if (json.flags.includes('s')) options.dotAll = true;
+			if (json.flags.includes('u')) options.unicode = true;
+			if (json.flags.includes('y')) options.sticky = true;
+		}
+
+		return new RGex(json.pattern, options);
 	}
 
 	// Static utility methods
 
 	/**
-	 * Escape a string for use in regex
+	 * Escapes special characters in a string for use in a regex.
+	 * @param text - The string to escape.
+	 * @returns The escaped string.
 	 */
 	static escape(text: string): string {
 		return escapeRegex(text);
 	}
 
 	/**
-	 * Validate a regex pattern
+	 * Validates if a given string is a valid regex pattern.
+	 * @param pattern - The pattern to validate.
+	 * @returns True if the pattern is valid, otherwise false.
 	 */
 	static validate(pattern: string): boolean {
 		return isValidRegex(pattern);
 	}
 
 	/**
-	 * Normalize text for processing
+	 * Normalizes text by converting to lowercase and removing extra whitespace.
+	 * @param text - The text to normalize.
+	 * @returns The normalized text.
 	 */
 	static normalize(text: string): string {
 		return normalizeText(text);
@@ -593,22 +689,26 @@ export class RGex {
 	// ============================================
 
 	/**
-	 * Short alias for toRegex
+	 * @deprecated Use RGex.toRegex instead.
+	 * Alias for `RGex.toRegex`.
 	 */
 	static h2r = RGex.toRegex;
 
 	/**
-	 * Short alias for toValidate
+	 * @deprecated Use RGex.toValidate instead.
+	 * Alias for `RGex.toValidate`.
 	 */
 	static h2v = RGex.toValidate;
 
 	/**
-	 * Short alias for humanText
+	 * @deprecated Use RGex.humanText instead.
+	 * Alias for `RGex.humanText`.
 	 */
 	static human = RGex.humanText;
 
 	/**
-	 * Short alias for getSuggestions
+	 * @deprecated Use RGex.getSuggestions instead.
+	 * Alias for `RGex.getSuggestions`.
 	 */
 	static suggest = RGex.getSuggestions;
 }

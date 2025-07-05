@@ -7,7 +7,16 @@ import type { TextExtractionResult } from '../../types/index.js';
 import { calculateConfidence } from './helpers.js';
 
 /**
- * Parse text formatting patterns
+ * Parses text for formatting patterns and returns a corresponding regex.
+ *
+ * It understands phrases like:
+ * - "uppercase only" / "all caps"
+ * - "no spaces"
+ * - "alphanumeric only"
+ *
+ * @param textForCapture The text to parse for formatting patterns.
+ * @param testValue Optional string to test the generated regex against for confidence scoring.
+ * @returns A `TextExtractionResult` object if a pattern is found, otherwise `null`.
  */
 export function parseTextFormattingPatterns(
 	textForCapture: string,

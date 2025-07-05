@@ -16,7 +16,11 @@ import {
 import { RGEX_CONFIG } from '../config/index.js';
 
 /**
- * Validate password with comprehensive analysis
+ * Validates a password against a comprehensive set of rules and provides a detailed analysis.
+ *
+ * @param password The password string to validate.
+ * @param options A `PasswordValidationOptions` object to customize the validation rules.
+ * @returns A `PasswordValidationResult` object containing the validation details.
  */
 export function validatePassword(
 	password: string,
@@ -76,7 +80,12 @@ export function validatePassword(
 }
 
 /**
- * Check password length requirements
+ * Checks if the password meets the length requirements.
+ * @param password The password to check.
+ * @param minLength The minimum required length.
+ * @param maxLength The maximum allowed length.
+ * @returns An object indicating if the check passed, if it was required, and a message.
+ * @internal
  */
 function checkLength(
 	password: string,
@@ -102,7 +111,11 @@ function checkLength(
 }
 
 /**
- * Check if password contains numbers
+ * Checks if the password contains at least one number.
+ * @param password The password to check.
+ * @param required Whether this check is required.
+ * @returns An object indicating if the check passed and if it was required.
+ * @internal
  */
 function checkHasNumber(
 	password: string,
@@ -117,7 +130,11 @@ function checkHasNumber(
 }
 
 /**
- * Check if password contains special characters
+ * Checks if the password contains at least one special character.
+ * @param password The password to check.
+ * @param required Whether this check is required.
+ * @returns An object indicating if the check passed and if it was required.
+ * @internal
  */
 function checkHasSpecial(
 	password: string,
@@ -133,7 +150,11 @@ function checkHasSpecial(
 }
 
 /**
- * Check if password contains uppercase characters
+ * Checks if the password contains at least one uppercase letter.
+ * @param password The password to check.
+ * @param required Whether this check is required.
+ * @returns An object indicating if the check passed and if it was required.
+ * @internal
  */
 function checkHasUpperChar(
 	password: string,
@@ -148,7 +169,11 @@ function checkHasUpperChar(
 }
 
 /**
- * Check if password contains lowercase characters
+ * Checks if the password contains at least one lowercase letter.
+ * @param password The password to check.
+ * @param required Whether this check is required.
+ * @returns An object indicating if the check passed and if it was required.
+ * @internal
  */
 function checkHasLowerChar(
 	password: string,
@@ -163,7 +188,11 @@ function checkHasLowerChar(
 }
 
 /**
- * Check if password contains symbols
+ * Checks if the password contains at least one symbol.
+ * @param password The password to check.
+ * @param required Whether this check is required.
+ * @returns An object indicating if the check passed and if it was required.
+ * @internal
  */
 function checkHasSymbol(
 	password: string,
@@ -179,7 +208,11 @@ function checkHasSymbol(
 }
 
 /**
- * Check if password contains unicode characters
+ * Checks if the password contains at least one Unicode character.
+ * @param password The password to check.
+ * @param required Whether this check is required.
+ * @returns An object indicating if the check passed and if it was required.
+ * @internal
  */
 function checkHasUnicode(
 	password: string,
@@ -195,7 +228,11 @@ function checkHasUnicode(
 }
 
 /**
- * Check if password has no sequential characters
+ * Checks if the password contains sequential characters (e.g., "abc", "123").
+ * @param password The password to check.
+ * @param required Whether this check is required.
+ * @returns An object indicating if the check passed and if it was required.
+ * @internal
  */
 function checkNoSequential(
 	password: string,
@@ -214,7 +251,11 @@ function checkNoSequential(
 }
 
 /**
- * Check if password has no repeating characters
+ * Checks if the password contains repeating characters (e.g., "aaa", "111").
+ * @param password The password to check.
+ * @param required Whether this check is required.
+ * @returns An object indicating if the check passed and if it was required.
+ * @internal
  */
 function checkNoRepeating(
 	password: string,
@@ -233,7 +274,11 @@ function checkNoRepeating(
 }
 
 /**
- * Check if password contains no common words
+ * Checks if the password is one of the commonly used passwords.
+ * @param password The password to check.
+ * @param required Whether this check is required.
+ * @returns An object indicating if the check passed and if it was required.
+ * @internal
  */
 function checkNoCommonWords(
 	password: string,
@@ -252,7 +297,11 @@ function checkNoCommonWords(
 }
 
 /**
- * Check custom pattern if provided
+ * Checks if the password matches a custom regex pattern.
+ * @param password The password to check.
+ * @param customPattern A custom regex pattern to test against.
+ * @returns An object indicating if the check passed, if it was required, and a message.
+ * @internal
  */
 function checkCustomPattern(
 	password: string,
@@ -283,7 +332,11 @@ function checkCustomPattern(
 }
 
 /**
- * Detect sequential characters in password
+ * Detects if a string contains sequential characters (e.g., "abc" or "123").
+ *
+ * @param password The string to check.
+ * @param minLength The minimum length of a sequence to be considered sequential. Defaults to 3.
+ * @returns `true` if sequential characters are found, otherwise `false`.
  */
 export function hasSequentialChars(
 	password: string,
@@ -323,7 +376,11 @@ export function hasSequentialChars(
 }
 
 /**
- * Detect repeating characters in password
+ * Detects if a string contains repeating characters (e.g., "aaa" or "111").
+ *
+ * @param password The string to check.
+ * @param minLength The minimum number of repeating characters to be considered a repetition. Defaults to 3.
+ * @returns `true` if repeating characters are found, otherwise `false`.
  */
 export function hasRepeatingChars(
 	password: string,
@@ -339,7 +396,10 @@ export function hasRepeatingChars(
 }
 
 /**
- * Check if password contains common words
+ * Checks if a password is found in the list of common passwords.
+ *
+ * @param password The password to check.
+ * @returns `true` if the password is in the common list, otherwise `false`.
  */
 export function hasCommonWords(password: string): boolean {
 	const lowerPassword = password.toLowerCase();
@@ -349,7 +409,12 @@ export function hasCommonWords(password: string): boolean {
 }
 
 /**
- * Calculate comprehensive password score (0-100)
+ * Calculates a strength score for the password based on various criteria.
+ * @param password The password string.
+ * @param results The results from individual validation checks.
+ * @param passedCount The number of passed validation checks.
+ * @returns A score from 0 to 100.
+ * @internal
  */
 function calculatePasswordScore(
 	password: string,
@@ -394,7 +459,12 @@ function calculatePasswordScore(
 }
 
 /**
- * Calculate password strength classification
+ * Determines the password strength level based on its score and other factors.
+ * @param score The calculated password score.
+ * @param length The length of the password.
+ * @param passedRequirements The number of passed requirements.
+ * @returns A string representing the password strength level.
+ * @internal
  */
 function calculatePasswordStrength(
 	score: number,
@@ -419,7 +489,11 @@ function calculatePasswordStrength(
 }
 
 /**
- * Get password improvement suggestions
+ * Provides suggestions for improving a password based on failed validation checks.
+ *
+ * @param password The password that was tested.
+ * @param options The validation options that were used.
+ * @returns An array of string suggestions to improve the password.
  */
 export function getPasswordSuggestions(
 	password: string,
@@ -451,7 +525,11 @@ export function getPasswordSuggestions(
 }
 
 /**
- * Generate a strong password suggestion
+ * Generates a strong, random password that adheres to specified criteria.
+ *
+ * @param length The desired length of the password. Defaults to 12.
+ * @param options Options to customize the character sets to include in the generated password.
+ * @returns A securely generated password string.
  */
 export function generateStrongPassword(
 	length: number = 12,

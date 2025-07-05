@@ -6,8 +6,15 @@
 import type { ValidationRule } from '../../types/index.js';
 import { REGEX_PATTERNS } from './patterns.js';
 
-// Validation pattern factories
+/**
+ * A collection of factory functions for creating validation rules.
+ * Each function returns a `ValidationRule` object.
+ */
 export const VALIDATION_PATTERNS = {
+	/**
+	 * Creates a validation rule for a required field.
+	 * @returns A validation rule object.
+	 */
 	required: (): ValidationRule => ({
 		name: 'required',
 		pattern: /.+/,
@@ -15,24 +22,41 @@ export const VALIDATION_PATTERNS = {
 		validator: (val: string) => val.trim().length > 0,
 	}),
 
+	/**
+	 * Creates a validation rule for an email address.
+	 * @returns A validation rule object.
+	 */
 	email: (): ValidationRule => ({
 		name: 'email',
 		pattern: new RegExp(REGEX_PATTERNS.EMAIL),
 		message: 'Please enter a valid email address',
 	}),
 
+	/**
+	 * Creates a validation rule for a phone number.
+	 * @returns A validation rule object.
+	 */
 	phone: (): ValidationRule => ({
 		name: 'phone',
 		pattern: new RegExp(REGEX_PATTERNS.PHONE),
 		message: 'Please enter a valid phone number',
 	}),
 
+	/**
+	 * Creates a validation rule for a URL.
+	 * @returns A validation rule object.
+	 */
 	url: (): ValidationRule => ({
 		name: 'url',
 		pattern: new RegExp(REGEX_PATTERNS.URL),
 		message: 'Please enter a valid URL',
 	}),
 
+	/**
+	 * Creates a validation rule for a minimum length.
+	 * @param length - The minimum required length.
+	 * @returns A validation rule object.
+	 */
 	minLength: (length: number): ValidationRule => ({
 		name: 'minLength',
 		pattern: new RegExp(`.{${length},}`),
@@ -40,6 +64,11 @@ export const VALIDATION_PATTERNS = {
 		validator: (val: string) => val.length >= length,
 	}),
 
+	/**
+	 * Creates a validation rule for a maximum length.
+	 * @param length - The maximum allowed length.
+	 * @returns A validation rule object.
+	 */
 	maxLength: (length: number): ValidationRule => ({
 		name: 'maxLength',
 		pattern: new RegExp(`^.{0,${length}}$`),
@@ -47,30 +76,50 @@ export const VALIDATION_PATTERNS = {
 		validator: (val: string) => val.length <= length,
 	}),
 
+	/**
+	 * Creates a validation rule for numbers only.
+	 * @returns A validation rule object.
+	 */
 	numbersOnly: (): ValidationRule => ({
 		name: 'numbersOnly',
 		pattern: new RegExp(REGEX_PATTERNS.DIGITS_ONLY),
 		message: 'Only numbers are allowed',
 	}),
 
+	/**
+	 * Creates a validation rule for letters only.
+	 * @returns A validation rule object.
+	 */
 	lettersOnly: (): ValidationRule => ({
 		name: 'lettersOnly',
 		pattern: new RegExp(REGEX_PATTERNS.LETTERS_ONLY),
 		message: 'Only letters are allowed',
 	}),
 
+	/**
+	 * Creates a validation rule for alphanumeric characters.
+	 * @returns A validation rule object.
+	 */
 	alphanumeric: (): ValidationRule => ({
 		name: 'alphanumeric',
 		pattern: new RegExp(REGEX_PATTERNS.ALPHANUMERIC),
 		message: 'Only letters and numbers are allowed',
 	}),
 
+	/**
+	 * Creates a validation rule that disallows spaces.
+	 * @returns A validation rule object.
+	 */
 	noSpaces: (): ValidationRule => ({
 		name: 'noSpaces',
 		pattern: new RegExp(REGEX_PATTERNS.NO_SPACES),
 		message: 'Spaces are not allowed',
 	}),
 
+	/**
+	 * Creates a validation rule for a strong password.
+	 * @returns A validation rule object.
+	 */
 	strongPassword: (): ValidationRule => ({
 		name: 'strongPassword',
 		pattern: new RegExp(REGEX_PATTERNS.STRONG_PASSWORD),
@@ -78,18 +127,30 @@ export const VALIDATION_PATTERNS = {
 			'Password must contain uppercase, lowercase, number, and special character',
 	}),
 
+	/**
+	 * Creates a validation rule for a UUID.
+	 * @returns A validation rule object.
+	 */
 	uuid: (): ValidationRule => ({
 		name: 'uuid',
 		pattern: new RegExp(REGEX_PATTERNS.UUID, 'i'),
 		message: 'Please enter a valid UUID',
 	}),
 
+	/**
+	 * Creates a validation rule for an IP address (v4 or v6).
+	 * @returns A validation rule object.
+	 */
 	ipAddress: (): ValidationRule => ({
 		name: 'ipAddress',
 		pattern: new RegExp(`(${REGEX_PATTERNS.IPV4})|(${REGEX_PATTERNS.IPV6})`),
 		message: 'Please enter a valid IP address',
 	}),
 
+	/**
+	 * Creates a validation rule for a date in YYYY-MM-DD format.
+	 * @returns A validation rule object.
+	 */
 	date: (): ValidationRule => ({
 		name: 'date',
 		pattern: new RegExp(REGEX_PATTERNS.DATE),
@@ -101,18 +162,30 @@ export const VALIDATION_PATTERNS = {
 		},
 	}),
 
+	/**
+	 * Creates a validation rule for time in HH:MM or HH:MM:SS format.
+	 * @returns A validation rule object.
+	 */
 	time: (): ValidationRule => ({
 		name: 'time',
 		pattern: new RegExp(REGEX_PATTERNS.TIME),
 		message: 'Please enter a valid time (HH:MM or HH:MM:SS)',
 	}),
 
+	/**
+	 * Creates a validation rule for a hex color code.
+	 * @returns A validation rule object.
+	 */
 	hexColor: (): ValidationRule => ({
 		name: 'hexColor',
 		pattern: new RegExp(REGEX_PATTERNS.HEX_COLOR),
 		message: 'Please enter a valid hex color (#fff or #ffffff)',
 	}),
 
+	/**
+	 * Creates a validation rule for a URL slug.
+	 * @returns A validation rule object.
+	 */
 	slug: (): ValidationRule => ({
 		name: 'slug',
 		pattern: new RegExp(REGEX_PATTERNS.SLUG),
@@ -120,6 +193,10 @@ export const VALIDATION_PATTERNS = {
 			'Please enter a valid slug (lowercase letters, numbers, and hyphens only)',
 	}),
 
+	/**
+	 * Creates a validation rule for a username.
+	 * @returns A validation rule object.
+	 */
 	username: (): ValidationRule => ({
 		name: 'username',
 		pattern: new RegExp(REGEX_PATTERNS.USERNAME),
@@ -127,24 +204,40 @@ export const VALIDATION_PATTERNS = {
 			'Username must be 3-20 characters long and contain only letters, numbers, and underscores',
 	}),
 
+	/**
+	 * Creates a validation rule for a domain name.
+	 * @returns A validation rule object.
+	 */
 	domain: (): ValidationRule => ({
 		name: 'domain',
 		pattern: new RegExp(REGEX_PATTERNS.DOMAIN),
 		message: 'Please enter a valid domain name',
 	}),
 
+	/**
+	 * Creates a validation rule for a credit card number.
+	 * @returns A validation rule object.
+	 */
 	creditCard: (): ValidationRule => ({
 		name: 'creditCard',
 		pattern: new RegExp(REGEX_PATTERNS.CREDIT_CARD),
 		message: 'Please enter a valid credit card number',
 	}),
 
+	/**
+	 * Creates a validation rule for a MongoDB ObjectID.
+	 * @returns A validation rule object.
+	 */
 	mongoId: (): ValidationRule => ({
 		name: 'mongoId',
 		pattern: new RegExp(REGEX_PATTERNS.MONGO_ID),
 		message: 'Please enter a valid MongoDB ObjectID',
 	}),
 
+	/**
+	 * Creates a validation rule for a base64 encoded string.
+	 * @returns A validation rule object.
+	 */
 	base64: (): ValidationRule => ({
 		name: 'base64',
 		pattern: new RegExp(REGEX_PATTERNS.BASE64),
@@ -158,6 +251,10 @@ export const VALIDATION_PATTERNS = {
 		},
 	}),
 
+	/**
+	 * Creates a validation rule for a JSON string.
+	 * @returns A validation rule object.
+	 */
 	json: (): ValidationRule => ({
 		name: 'json',
 		pattern: /^[\s\S]*$/,
@@ -173,7 +270,9 @@ export const VALIDATION_PATTERNS = {
 	}),
 };
 
-// Validation pattern keywords for human text recognition
+/**
+ * A mapping of human-readable keywords to validation rule factories.
+ */
 export const VALIDATION_KEYWORDS: Record<
 	string,
 	() => ValidationRule | ((param: number) => ValidationRule)
@@ -206,7 +305,9 @@ export const VALIDATION_KEYWORDS: Record<
 	json: VALIDATION_PATTERNS.json,
 };
 
-// Length constraint patterns
+/**
+ * A mapping for length-related validation rule factories.
+ */
 export const LENGTH_PATTERNS = {
 	'min length': VALIDATION_PATTERNS.minLength,
 	'max length': VALIDATION_PATTERNS.maxLength,

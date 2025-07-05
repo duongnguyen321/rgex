@@ -6,14 +6,18 @@
 import type { RegexBuilderOptions } from '../../types/index.js';
 
 /**
- * Escape special regex characters in a string
+ * Escapes special characters in a string for use in a regular expression.
+ * @param text - The input string to escape.
+ * @returns The escaped string, safe to be inserted into a regex.
  */
 export function escapeRegex(text: string): string {
 	return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 /**
- * Convert options object to regex flags string
+ * Converts a `RegexBuilderOptions` object into a regex flags string (e.g., "gi").
+ * @param options - The options object to convert.
+ * @returns A string containing the regex flags.
  */
 export function optionsToFlags(options: RegexBuilderOptions): string {
 	const flags: string[] = [];
@@ -37,7 +41,9 @@ export function optionsToFlags(options: RegexBuilderOptions): string {
 }
 
 /**
- * Convert flags string to options object
+ * Converts a regex flags string into a `RegexBuilderOptions` object.
+ * @param flags - The flags string to convert.
+ * @returns An options object representing the flags.
  */
 export function flagsToOptions(flags: string): RegexBuilderOptions {
 	const options: RegexBuilderOptions = {};
@@ -53,7 +59,9 @@ export function flagsToOptions(flags: string): RegexBuilderOptions {
 }
 
 /**
- * Validate if a string is a valid regex pattern
+ * Validates if a given string is a syntactically correct regular expression pattern.
+ * @param pattern - The regex pattern string to validate.
+ * @returns `true` if the pattern is valid, otherwise `false`.
  */
 export function isValidRegex(pattern: string): boolean {
 	try {
@@ -65,14 +73,19 @@ export function isValidRegex(pattern: string): boolean {
 }
 
 /**
- * Clean and normalize input text for processing
+ * Cleans and normalizes a string by converting it to lowercase, trimming whitespace,
+ * and collapsing multiple whitespace characters into a single space.
+ * @param text - The string to normalize.
+ * @returns The normalized string.
  */
 export function normalizeText(text: string): string {
 	return text.toLowerCase().trim().replace(/\s+/g, ' ');
 }
 
 /**
- * Extract numeric values from text
+ * Extracts all numeric values from a string.
+ * @param text - The string to extract numbers from.
+ * @returns An array of numbers found in the string.
  */
 export function extractNumbers(text: string): number[] {
 	const matches = text.match(/\d+/g);
@@ -80,7 +93,14 @@ export function extractNumbers(text: string): number[] {
 }
 
 /**
- * Calculate confidence score based on multiple factors
+ * Calculates a confidence score for a matched pattern.
+ * The score is adjusted based on whether a test value was provided, if it passed,
+ * and the complexity of the regex pattern itself.
+ * @param baseScore - The initial confidence score.
+ * @param hasTestValue - Whether a test value was provided.
+ * @param testPassed - Whether the test value passed the regex validation.
+ * @param complexity - A multiplier for the pattern's complexity.
+ * @returns The calculated confidence score, clamped between 0 and 1.
  */
 export function calculateConfidence(
 	baseScore: number,
@@ -101,7 +121,10 @@ export function calculateConfidence(
 }
 
 /**
- * Merge multiple regex patterns with OR operator
+ * Merges an array of regex pattern strings using the OR `|` operator.
+ * @param patterns - An array of pattern strings to merge.
+ * @param useGroups - If true, wraps the entire merged pattern in a non-capturing group.
+ * @returns The combined regex pattern string.
  */
 export function mergePatterns(
 	patterns: string[],
@@ -111,11 +134,13 @@ export function mergePatterns(
 	if (patterns.length === 1) return patterns[0] ?? '';
 
 	const joinedPatterns = patterns.join('|');
-	return useGroups ? `(${joinedPatterns})` : joinedPatterns;
+	return useGroups ? `(?:${joinedPatterns})` : joinedPatterns;
 }
 
 /**
- * Generate random test data for pattern validation
+ * Generates sample test data for a given pattern type.
+ * @param type - The type of data to generate (e.g., 'email', 'phone').
+ * @returns An array of test strings, including both valid and invalid examples.
  */
 export function generateTestData(type: string): string[] {
 	const testData: Record<string, string[]> = {
@@ -131,14 +156,19 @@ export function generateTestData(type: string): string[] {
 }
 
 /**
- * Check if a character is a special regex character
+ * Checks if a single character is a special regex character.
+ * @param char - The character to check.
+ * @returns `true` if the character has a special meaning in regex, otherwise `false`.
  */
 export function isSpecialChar(char: string): boolean {
 	return /[.*+?^${}()|[\]\\]/.test(char);
 }
 
 /**
- * Count the complexity of a regex pattern
+ * Calculates a complexity score for a regex pattern.
+ * More complex features like lookarounds and groups increase the score.
+ * @param pattern - The regex pattern string to analyze.
+ * @returns A numeric complexity score.
  */
 export function calculatePatternComplexity(pattern: string): number {
 	let complexity = 1;
@@ -165,7 +195,11 @@ export function calculatePatternComplexity(pattern: string): number {
 }
 
 /**
- * Debounce function for performance optimization
+ * Creates a debounced function that delays invoking `func` until after `wait` milliseconds
+ * have elapsed since the last time the debounced function was invoked.
+ * @param func - The function to debounce.
+ * @param wait - The number of milliseconds to delay.
+ * @returns The new debounced function.
  */
 export function debounce<T extends (...args: any[]) => any>(
 	func: T,
@@ -180,26 +214,30 @@ export function debounce<T extends (...args: any[]) => any>(
 }
 
 /**
- * Deep clone an object
+ * Creates a deep clone of an object or array.
+ * @param obj - The object to clone.
+ * @returns A deep copy of the object.
  */
 export function deepClone<T>(obj: T): T {
 	if (obj === null || typeof obj !== 'object') return obj;
 	if (obj instanceof Date) return new Date(obj.getTime()) as T;
 	if (obj instanceof Array) return obj.map((item) => deepClone(item)) as T;
-	if (typeof obj === 'object') {
-		const cloned = {} as T;
+	if (obj instanceof Object) {
+		const cloned = {} as { [key: string]: any };
 		for (const key in obj) {
 			if (obj.hasOwnProperty(key)) {
 				cloned[key] = deepClone(obj[key]);
 			}
 		}
-		return cloned;
+		return cloned as T;
 	}
-	return obj;
+	throw new Error('Unable to clone object');
 }
 
 /**
- * Validate an email address format
+ * Validates if a string is in a correct email format.
+ * @param email - The email string to validate.
+ * @returns `true` if the email format is valid, otherwise `false`.
  */
 export function isValidEmail(email: string): boolean {
 	const emailRegex =
@@ -208,14 +246,18 @@ export function isValidEmail(email: string): boolean {
 }
 
 /**
- * Format a confidence score as a percentage
+ * Formats a confidence score (a number between 0 and 1) as a percentage string.
+ * @param confidence - The confidence score.
+ * @returns The formatted percentage string (e.g., "85%").
  */
 export function formatConfidence(confidence: number): string {
 	return `${Math.round(confidence * 100)}%`;
 }
 
 /**
- * Check if running in development mode
+ * Checks if the current environment is a development environment.
+ * It checks `process.env.NODE_ENV` in both Node.js and browser-like environments.
+ * @returns `true` if in a development environment, otherwise `false`.
  */
 export function isDevelopment(): boolean {
 	try {
@@ -241,7 +283,8 @@ export function isDevelopment(): boolean {
 }
 
 /**
- * Get current timestamp in ISO format
+ * Gets the current timestamp in ISO 8601 format.
+ * @returns The current timestamp as an ISO string.
  */
 export function getTimestamp(): string {
 	return new Date().toISOString();

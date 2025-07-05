@@ -7,7 +7,15 @@ import type { TextExtractionResult } from '../../types/index.js';
 import { calculateConfidence } from './helpers.js';
 
 /**
- * Parse financial/ID-related patterns
+ * Parses text for common financial and government ID-related patterns.
+ *
+ * This function identifies patterns for Visa credit cards, Social Security Numbers (SSN),
+ * and US ZIP codes. It returns a structured result with the corresponding regex pattern,
+ * a confidence score, and a description.
+ *
+ * @param textForCapture - The natural language text to be analyzed for patterns.
+ * @param testValue - An optional string to test the generated pattern against for confidence scoring.
+ * @returns A `TextExtractionResult` object if a pattern is successfully parsed, otherwise `null`.
  */
 export function parseFinancialPatterns(
 	textForCapture: string,

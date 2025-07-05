@@ -13,7 +13,19 @@ import {
 import { calculateConfidence } from './helpers.js';
 
 /**
- * Parse length constraint patterns like "between X and Y characters", "exactly X characters"
+ * Parses text for length constraints and returns a regex pattern.
+ *
+ * It understands phrases like:
+ * - "between X and Y characters"
+ * - "exactly X characters"
+ * - "at least X characters"
+ * - "at most X characters"
+ * - "minimum X characters"
+ * - "maximum X characters"
+ *
+ * @param textForCapture The text to parse for length constraints.
+ * @param testValue Optional string to test the generated regex against for confidence scoring.
+ * @returns A `TextExtractionResult` object if a constraint is found, otherwise `null`.
  */
 export function parseLengthConstraints(
 	textForCapture: string,

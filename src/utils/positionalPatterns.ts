@@ -8,7 +8,17 @@ import { STARTS_WITH, ENDS_WITH, CONTAINS } from '../constants/patterns.js';
 import { calculateConfidence } from './helpers.js';
 
 /**
- * Parse positional patterns like "starts with X", "ends with Y", "contains Z"
+ * Parses text for positional patterns and returns a corresponding regex.
+ *
+ * It understands phrases like:
+ * - "starts with '...'"
+ * - "ends with '...'"
+ * - "contains '...'"
+ *
+ * @param textForCapture The text to parse for positional patterns.
+ * @param testValue Optional string to test the generated regex against for confidence scoring.
+ * @param originalText Optional original, case-sensitive text to preserve casing in the regex.
+ * @returns A `TextExtractionResult` object if a pattern is found, otherwise `null`.
  */
 export function parsePositionalPatterns(
 	textForCapture: string,

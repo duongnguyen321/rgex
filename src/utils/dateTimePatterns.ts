@@ -7,7 +7,15 @@ import type { TextExtractionResult } from '../../types/index.js';
 import { calculateConfidence } from './helpers.js';
 
 /**
- * Parse date/time-related patterns
+ * Parses text for common date and time related patterns.
+ *
+ * This function checks for various date formats like MM/DD/YYYY (American) and DD/MM/YYYY (European),
+ * as well as age-related queries like "age 18+". It returns a structured result
+ * with the corresponding regex pattern, a confidence score, and a description.
+ *
+ * @param textForCapture - The natural language text to be analyzed for date/time patterns.
+ * @param testValue - An optional string to test the generated pattern against for confidence scoring.
+ * @returns A `TextExtractionResult` object if a pattern is successfully parsed, otherwise `null`.
  */
 export function parseDateTimePatterns(
 	textForCapture: string,

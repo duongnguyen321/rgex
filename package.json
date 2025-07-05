@@ -25,7 +25,7 @@
 		"build:docs": "typedoc --options typedoc.json",
 		"build": "bun run build:js && bun run build:types",
 		"build:min": "bun run build:js:min && bun run build:types",
-		"build:ci": "bun install && bun test && bun run build",
+		"build:ci": "bun install && bun run build && bun test",
 		"docs": "bun run build:docs && echo 'Markdown documentation generated in docs/'",
 		"docs:preview": "bun run build:docs && echo 'Documentation built! Check docs/README.md'",
 		"pages:build": "bun run build:docs && echo 'GitHub Pages build complete'",

@@ -197,7 +197,7 @@ const unicodeResult = t2r(
 // Matches: "Hello 世界! 123", "Café résumé naïve"
 ```
 
-The system supports over 11 categories of advanced patterns. For a full list of capabilities, see [`ENHANCED_T2R_SUMMARY.md`](./ENHANCED_T2R_SUMMARY.md).
+The system supports over 11 categories of advanced patterns.
 
 ### Human Text to Validation
 

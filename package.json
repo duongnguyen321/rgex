@@ -32,7 +32,8 @@
 		"pages:info": "bun run scripts/github-actions-info.ts",
 		"lint": "tsc --noEmit",
 		"start": "tsx examples/examples.ts",
-		"postinstall": "node scripts/postinstall.js"
+		"postinstall": "node scripts/postinstall.js",
+		"prepare": "husky"
 	},
 	"keywords": [
 		"regex",
@@ -51,10 +52,13 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^24.0.10",
+		"husky": "^9.1.7",
 		"jsdoc": "^4.0.4",
 		"jsdoc-tsimport-plugin": "^1.0.5",
+		"lint-staged": "^16.1.2",
 		"tsx": "^4.20.3",
 		"typedoc": "^0.28.7",
+		"typedoc-github-theme": "^0.3.0",
 		"typedoc-plugin-markdown": "^4.7.0",
 		"typescript": "^5.0.0"
 	},
@@ -75,5 +79,12 @@
 		"scripts/",
 		"README.md",
 		"LICENSE"
-	]
+	],
+	"lint-staged": {
+		"*.{ts,tsx}": [
+			"bun run build",
+			"bun test",
+			"bun run build:docs"
+		]
+	}
 }

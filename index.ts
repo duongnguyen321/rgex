@@ -49,7 +49,7 @@ if (typeof globalThis !== 'undefined' && !(globalThis as any).__RGEX_LOADED__) {
 	if (shouldShowWelcome) {
 		const welcome = `
 🎉 RGex loaded! Enhanced regex building platform
-🌐 Visit: https://codetails.site for more tools
+🌐 Visit: https://duongnguyen321.github.io/rgex for more tools
 📚 Documentation: https://github.com/duongnguyen321/rgex#readme
 `;
 

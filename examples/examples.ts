@@ -1,10 +1,9 @@
 import {
+	parseHumanTextToValidation,
+	REGEX_PATTERNS,
 	rgex,
 	RGex,
-	REGEX_PATTERNS,
 	validatePassword,
-	parseHumanTextToRegex,
-	parseHumanTextToValidation,
 } from '../dist/index.js';
 
 console.log('🚀 RGex - Enhanced Regex Builder Platform Examples\n');
@@ -320,5 +319,5 @@ console.log('✅ Pre-built pattern constants');
 console.log('✅ Fluent builder API');
 console.log('✅ Comprehensive utilities');
 console.log();
-console.log('🌐 Visit https://codetails.site for more tools!');
+console.log('🌐 Visit https://duongnguyen321.github.io/rgex for more tools!');
 console.log('📚 Documentation: https://github.com/duongnguyen321/rgex#readme');

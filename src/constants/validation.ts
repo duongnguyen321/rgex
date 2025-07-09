@@ -268,6 +268,366 @@ export const VALIDATION_PATTERNS = {
 			}
 		},
 	}),
+
+	/**
+	 * Creates a validation rule for a Social Security Number.
+	 * @returns A validation rule object.
+	 */
+	ssn: (): ValidationRule => ({
+		name: 'ssn',
+		pattern: new RegExp(REGEX_PATTERNS.SSN),
+		message: 'Please enter a valid Social Security Number (XXX-XX-XXXX)',
+	}),
+
+	/**
+	 * Creates a validation rule for US ZIP codes.
+	 * @returns A validation rule object.
+	 */
+	zipCode: (): ValidationRule => ({
+		name: 'zipCode',
+		pattern: new RegExp(REGEX_PATTERNS.US_ZIP_CODE),
+		message: 'Please enter a valid ZIP code (12345 or 12345-6789)',
+	}),
+
+	/**
+	 * Creates a validation rule for Canadian postal codes.
+	 * @returns A validation rule object.
+	 */
+	postalCode: (): ValidationRule => ({
+		name: 'postalCode',
+		pattern: new RegExp(REGEX_PATTERNS.CANADIAN_POSTAL_CODE),
+		message: 'Please enter a valid postal code (A1A 1A1)',
+	}),
+
+	/**
+	 * Creates a validation rule for UK postcodes.
+	 * @returns A validation rule object.
+	 */
+	ukPostcode: (): ValidationRule => ({
+		name: 'ukPostcode',
+		pattern: new RegExp(REGEX_PATTERNS.UK_POSTCODE),
+		message: 'Please enter a valid UK postcode',
+	}),
+
+	/**
+	 * Creates a validation rule for file extensions.
+	 * @returns A validation rule object.
+	 */
+	fileExtension: (): ValidationRule => ({
+		name: 'fileExtension',
+		pattern: new RegExp(REGEX_PATTERNS.FILE_EXTENSION),
+		message: 'Please enter a valid file with extension',
+	}),
+
+	/**
+	 * Creates a validation rule for image files.
+	 * @returns A validation rule object.
+	 */
+	imageFile: (): ValidationRule => ({
+		name: 'imageFile',
+		pattern: new RegExp(REGEX_PATTERNS.IMAGE_FILE),
+		message: 'Please enter a valid image file (jpg, png, gif, etc.)',
+	}),
+
+	/**
+	 * Creates a validation rule for document files.
+	 * @returns A validation rule object.
+	 */
+	documentFile: (): ValidationRule => ({
+		name: 'documentFile',
+		pattern: new RegExp(REGEX_PATTERNS.DOCUMENT_FILE),
+		message: 'Please enter a valid document file (pdf, doc, txt, etc.)',
+	}),
+
+	/**
+	 * Creates a validation rule for timestamps.
+	 * @returns A validation rule object.
+	 */
+	timestamp: (): ValidationRule => ({
+		name: 'timestamp',
+		pattern: new RegExp(REGEX_PATTERNS.TIMESTAMP),
+		message: 'Please enter a valid timestamp',
+	}),
+
+	/**
+	 * Creates a validation rule for ISO datetime format.
+	 * @returns A validation rule object.
+	 */
+	isoDateTime: (): ValidationRule => ({
+		name: 'isoDateTime',
+		pattern: new RegExp(REGEX_PATTERNS.ISO_DATETIME),
+		message: 'Please enter a valid ISO datetime (YYYY-MM-DDTHH:mm:ss.sssZ)',
+	}),
+
+	/**
+	 * Creates a validation rule for Visa credit cards.
+	 * @returns A validation rule object.
+	 */
+	visaCard: (): ValidationRule => ({
+		name: 'visaCard',
+		pattern: new RegExp(REGEX_PATTERNS.VISA_CARD),
+		message: 'Please enter a valid Visa card number',
+	}),
+
+	/**
+	 * Creates a validation rule for Mastercard credit cards.
+	 * @returns A validation rule object.
+	 */
+	masterCard: (): ValidationRule => ({
+		name: 'masterCard',
+		pattern: new RegExp(REGEX_PATTERNS.MASTERCARD),
+		message: 'Please enter a valid Mastercard number',
+	}),
+
+	/**
+	 * Creates a validation rule for American Express credit cards.
+	 * @returns A validation rule object.
+	 */
+	amexCard: (): ValidationRule => ({
+		name: 'amexCard',
+		pattern: new RegExp(REGEX_PATTERNS.AMEX),
+		message: 'Please enter a valid American Express card number',
+	}),
+
+	/**
+	 * Creates a validation rule for MAC addresses.
+	 * @returns A validation rule object.
+	 */
+	macAddress: (): ValidationRule => ({
+		name: 'macAddress',
+		pattern: new RegExp(REGEX_PATTERNS.MAC_ADDRESS),
+		message: 'Please enter a valid MAC address (XX:XX:XX:XX:XX:XX)',
+	}),
+
+	/**
+	 * Creates a validation rule for Bitcoin addresses.
+	 * @returns A validation rule object.
+	 */
+	bitcoinAddress: (): ValidationRule => ({
+		name: 'bitcoinAddress',
+		pattern: new RegExp(REGEX_PATTERNS.BITCOIN_ADDRESS),
+		message: 'Please enter a valid Bitcoin address',
+	}),
+
+	/**
+	 * Creates a validation rule for Ethereum addresses.
+	 * @returns A validation rule object.
+	 */
+	ethereumAddress: (): ValidationRule => ({
+		name: 'ethereumAddress',
+		pattern: new RegExp(REGEX_PATTERNS.ETHEREUM_ADDRESS),
+		message: 'Please enter a valid Ethereum address',
+	}),
+
+	/**
+	 * Creates a validation rule for IBAN codes.
+	 * @returns A validation rule object.
+	 */
+	iban: (): ValidationRule => ({
+		name: 'iban',
+		pattern: new RegExp(REGEX_PATTERNS.IBAN),
+		message: 'Please enter a valid IBAN code',
+	}),
+
+	/**
+	 * Creates a validation rule for SWIFT/BIC codes.
+	 * @returns A validation rule object.
+	 */
+	swiftCode: (): ValidationRule => ({
+		name: 'swiftCode',
+		pattern: new RegExp(REGEX_PATTERNS.SWIFT_CODE),
+		message: 'Please enter a valid SWIFT/BIC code',
+	}),
+
+	/**
+	 * Creates a validation rule for ISBN-10 codes.
+	 * @returns A validation rule object.
+	 */
+	isbn10: (): ValidationRule => ({
+		name: 'isbn10',
+		pattern: new RegExp(REGEX_PATTERNS.ISBN_10),
+		message: 'Please enter a valid ISBN-10 code',
+	}),
+
+	/**
+	 * Creates a validation rule for ISBN-13 codes.
+	 * @returns A validation rule object.
+	 */
+	isbn13: (): ValidationRule => ({
+		name: 'isbn13',
+		pattern: new RegExp(REGEX_PATTERNS.ISBN_13),
+		message: 'Please enter a valid ISBN-13 code',
+	}),
+
+	/**
+	 * Creates a validation rule for semantic version numbers.
+	 * @returns A validation rule object.
+	 */
+	semver: (): ValidationRule => ({
+		name: 'semver',
+		pattern: new RegExp(REGEX_PATTERNS.SEMVER),
+		message: 'Please enter a valid semantic version (X.Y.Z)',
+	}),
+
+	/**
+	 * Creates a validation rule for JWT tokens.
+	 * @returns A validation rule object.
+	 */
+	jwtToken: (): ValidationRule => ({
+		name: 'jwtToken',
+		pattern: new RegExp(REGEX_PATTERNS.JWT_TOKEN),
+		message: 'Please enter a valid JWT token',
+	}),
+
+	/**
+	 * Creates a validation rule for GitHub usernames.
+	 * @returns A validation rule object.
+	 */
+	githubUsername: (): ValidationRule => ({
+		name: 'githubUsername',
+		pattern: new RegExp(REGEX_PATTERNS.GITHUB_USERNAME, 'i'),
+		message: 'Please enter a valid GitHub username',
+	}),
+
+	/**
+	 * Creates a validation rule for Twitter handles.
+	 * @returns A validation rule object.
+	 */
+	twitterHandle: (): ValidationRule => ({
+		name: 'twitterHandle',
+		pattern: new RegExp(REGEX_PATTERNS.TWITTER_HANDLE),
+		message: 'Please enter a valid Twitter handle (max 15 characters)',
+	}),
+
+	/**
+	 * Creates a validation rule for Discord user IDs.
+	 * @returns A validation rule object.
+	 */
+	discordId: (): ValidationRule => ({
+		name: 'discordId',
+		pattern: new RegExp(REGEX_PATTERNS.DISCORD_ID),
+		message: 'Please enter a valid Discord user ID',
+	}),
+
+	/**
+	 * Creates a validation rule for YouTube video IDs.
+	 * @returns A validation rule object.
+	 */
+	youtubeVideoId: (): ValidationRule => ({
+		name: 'youtubeVideoId',
+		pattern: new RegExp(REGEX_PATTERNS.YOUTUBE_VIDEO_ID),
+		message: 'Please enter a valid YouTube video ID',
+	}),
+
+	/**
+	 * Creates a validation rule for Google Drive file IDs.
+	 * @returns A validation rule object.
+	 */
+	googleDriveId: (): ValidationRule => ({
+		name: 'googleDriveId',
+		pattern: new RegExp(REGEX_PATTERNS.GOOGLE_DRIVE_ID),
+		message: 'Please enter a valid Google Drive file ID',
+	}),
+
+	/**
+	 * Creates a validation rule for AWS S3 bucket names.
+	 * @returns A validation rule object.
+	 */
+	s3BucketName: (): ValidationRule => ({
+		name: 's3BucketName',
+		pattern: new RegExp(REGEX_PATTERNS.AWS_S3_BUCKET),
+		message: 'Please enter a valid S3 bucket name (3-63 chars, lowercase)',
+	}),
+
+	/**
+	 * Creates a validation rule for Docker image names.
+	 * @returns A validation rule object.
+	 */
+	dockerImage: (): ValidationRule => ({
+		name: 'dockerImage',
+		pattern: new RegExp(REGEX_PATTERNS.DOCKER_IMAGE),
+		message: 'Please enter a valid Docker image name',
+	}),
+
+	/**
+	 * Creates a validation rule for NPM package names.
+	 * @returns A validation rule object.
+	 */
+	npmPackage: (): ValidationRule => ({
+		name: 'npmPackage',
+		pattern: new RegExp(REGEX_PATTERNS.NPM_PACKAGE),
+		message: 'Please enter a valid NPM package name',
+	}),
+
+	/**
+	 * Creates a validation rule for Git commit hashes (SHA-1).
+	 * @returns A validation rule object.
+	 */
+	gitCommit: (): ValidationRule => ({
+		name: 'gitCommit',
+		pattern: new RegExp(REGEX_PATTERNS.GIT_COMMIT, 'i'),
+		message: 'Please enter a valid Git commit hash',
+	}),
+
+	/**
+	 * Creates a validation rule for Kubernetes resource names.
+	 * @returns A validation rule object.
+	 */
+	k8sResourceName: (): ValidationRule => ({
+		name: 'k8sResourceName',
+		pattern: new RegExp(REGEX_PATTERNS.K8S_RESOURCE_NAME),
+		message: 'Please enter a valid Kubernetes resource name',
+	}),
+
+	/**
+	 * Creates a validation rule for LinkedIn profile URLs.
+	 * @returns A validation rule object.
+	 */
+	linkedinProfile: (): ValidationRule => ({
+		name: 'linkedinProfile',
+		pattern: new RegExp(REGEX_PATTERNS.LINKEDIN_PROFILE),
+		message: 'Please enter a valid LinkedIn profile URL',
+	}),
+
+	/**
+	 * Creates a validation rule for Slack user IDs.
+	 * @returns A validation rule object.
+	 */
+	slackUserId: (): ValidationRule => ({
+		name: 'slackUserId',
+		pattern: new RegExp(REGEX_PATTERNS.SLACK_USER_ID),
+		message: 'Please enter a valid Slack user ID',
+	}),
+
+	/**
+	 * Creates a validation rule for Twilio phone numbers (E.164 format).
+	 * @returns A validation rule object.
+	 */
+	e164Phone: (): ValidationRule => ({
+		name: 'e164Phone',
+		pattern: new RegExp(REGEX_PATTERNS.E164_PHONE),
+		message: 'Please enter a valid E.164 phone number (+1234567890)',
+	}),
+
+	/**
+	 * Creates a validation rule for Firebase project IDs.
+	 * @returns A validation rule object.
+	 */
+	firebaseProjectId: (): ValidationRule => ({
+		name: 'firebaseProjectId',
+		pattern: new RegExp(REGEX_PATTERNS.FIREBASE_PROJECT_ID),
+		message: 'Please enter a valid Firebase project ID',
+	}),
+
+	/**
+	 * Creates a validation rule for Azure resource group names.
+	 * @returns A validation rule object.
+	 */
+	azureResourceGroup: (): ValidationRule => ({
+		name: 'azureResourceGroup',
+		pattern: new RegExp(REGEX_PATTERNS.AZURE_RESOURCE_GROUP),
+		message: 'Please enter a valid Azure resource group name',
+	}),
 };
 
 /**
@@ -303,6 +663,64 @@ export const VALIDATION_KEYWORDS: Record<
 	'mongodb id': VALIDATION_PATTERNS.mongoId,
 	base64: VALIDATION_PATTERNS.base64,
 	json: VALIDATION_PATTERNS.json,
+	ssn: VALIDATION_PATTERNS.ssn,
+	'social security': VALIDATION_PATTERNS.ssn,
+	'social security number': VALIDATION_PATTERNS.ssn,
+	'zip code': VALIDATION_PATTERNS.zipCode,
+	'postal code': VALIDATION_PATTERNS.postalCode,
+	'uk postcode': VALIDATION_PATTERNS.ukPostcode,
+	'file extension': VALIDATION_PATTERNS.fileExtension,
+	'image file': VALIDATION_PATTERNS.imageFile,
+	'document file': VALIDATION_PATTERNS.documentFile,
+	timestamp: VALIDATION_PATTERNS.timestamp,
+	'iso datetime': VALIDATION_PATTERNS.isoDateTime,
+	'visa card': VALIDATION_PATTERNS.visaCard,
+	mastercard: VALIDATION_PATTERNS.masterCard,
+	'master card': VALIDATION_PATTERNS.masterCard,
+	'amex card': VALIDATION_PATTERNS.amexCard,
+	'american express': VALIDATION_PATTERNS.amexCard,
+	'mac address': VALIDATION_PATTERNS.macAddress,
+	'bitcoin address': VALIDATION_PATTERNS.bitcoinAddress,
+	bitcoin: VALIDATION_PATTERNS.bitcoinAddress,
+	'ethereum address': VALIDATION_PATTERNS.ethereumAddress,
+	ethereum: VALIDATION_PATTERNS.ethereumAddress,
+	iban: VALIDATION_PATTERNS.iban,
+	'swift code': VALIDATION_PATTERNS.swiftCode,
+	'bic code': VALIDATION_PATTERNS.swiftCode,
+	'isbn 10': VALIDATION_PATTERNS.isbn10,
+	isbn10: VALIDATION_PATTERNS.isbn10,
+	'isbn 13': VALIDATION_PATTERNS.isbn13,
+	isbn13: VALIDATION_PATTERNS.isbn13,
+	semver: VALIDATION_PATTERNS.semver,
+	'semantic version': VALIDATION_PATTERNS.semver,
+	'jwt token': VALIDATION_PATTERNS.jwtToken,
+	jwt: VALIDATION_PATTERNS.jwtToken,
+	'github username': VALIDATION_PATTERNS.githubUsername,
+	'twitter handle': VALIDATION_PATTERNS.twitterHandle,
+	twitter: VALIDATION_PATTERNS.twitterHandle,
+	'discord id': VALIDATION_PATTERNS.discordId,
+	discord: VALIDATION_PATTERNS.discordId,
+	'youtube video id': VALIDATION_PATTERNS.youtubeVideoId,
+	'youtube id': VALIDATION_PATTERNS.youtubeVideoId,
+	'google drive id': VALIDATION_PATTERNS.googleDriveId,
+	's3 bucket': VALIDATION_PATTERNS.s3BucketName,
+	's3 bucket name': VALIDATION_PATTERNS.s3BucketName,
+	'docker image': VALIDATION_PATTERNS.dockerImage,
+	'npm package': VALIDATION_PATTERNS.npmPackage,
+	'git commit': VALIDATION_PATTERNS.gitCommit,
+	'commit hash': VALIDATION_PATTERNS.gitCommit,
+	'k8s resource': VALIDATION_PATTERNS.k8sResourceName,
+	'kubernetes resource': VALIDATION_PATTERNS.k8sResourceName,
+	'linkedin profile': VALIDATION_PATTERNS.linkedinProfile,
+	linkedin: VALIDATION_PATTERNS.linkedinProfile,
+	'slack user id': VALIDATION_PATTERNS.slackUserId,
+	'slack id': VALIDATION_PATTERNS.slackUserId,
+	'e164 phone': VALIDATION_PATTERNS.e164Phone,
+	'international phone': VALIDATION_PATTERNS.e164Phone,
+	'firebase project id': VALIDATION_PATTERNS.firebaseProjectId,
+	firebase: VALIDATION_PATTERNS.firebaseProjectId,
+	'azure resource group': VALIDATION_PATTERNS.azureResourceGroup,
+	azure: VALIDATION_PATTERNS.azureResourceGroup,
 };
 
 /**

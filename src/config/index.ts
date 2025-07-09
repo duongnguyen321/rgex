@@ -9,7 +9,7 @@ export const RGEX_CONFIG = {
 	version: '1.0.0',
 	description: 'A powerful, chainable regex builder platform',
 	author: 'duongnguyen321',
-	website: 'https://codetails.site',
+	website: 'https://duongnguyen321.github.io/rgex/',
 	repository: 'https://github.com/duongnguyen321/rgex',
 
 	// Default settings

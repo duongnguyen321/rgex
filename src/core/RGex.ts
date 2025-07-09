@@ -15,26 +15,25 @@
  */
 
 import type {
-	RegexBuilderOptions,
 	PasswordValidationOptions,
 	PasswordValidationResult,
+	RegexBuilderOptions,
 	TextExtractionResult,
 	ValidationExtractionResult,
 } from '../../types/index.js';
 
-import { REGEX_PATTERNS } from '../constants/patterns.js';
 import { RGEX_CONFIG } from '../config/index.js';
+import { REGEX_PATTERNS } from '../constants/patterns.js';
 import {
 	escapeRegex,
-	optionsToFlags,
 	isValidRegex,
 	normalizeText,
-	calculateConfidence,
+	optionsToFlags,
 } from '../utils/helpers.js';
 import {
+	getPatternSuggestions,
 	parseHumanTextToRegex,
 	parseHumanTextToValidation,
-	getPatternSuggestions,
 } from '../utils/humanText.js';
 import { validatePassword } from '../utils/password.js';
 

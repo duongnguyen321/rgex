@@ -83,6 +83,48 @@ export const REGEX_PATTERNS = {
 
 	// Encoding patterns
 	BASE64: '^[A-Za-z0-9+/]*={0,2}$',
+
+	// Cryptocurrency patterns
+	BITCOIN_ADDRESS: '^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$',
+	ETHEREUM_ADDRESS: '^0x[a-fA-F0-9]{40}$',
+
+	// Banking patterns
+	IBAN: '^[A-Z]{2}[0-9]{2}[A-Z0-9]{4,30}$',
+	SWIFT_CODE: '^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$',
+
+	// ISBN patterns
+	ISBN_10: '^(?:\\d{9}[\\dX]|\\d{10})$',
+	ISBN_13: '^97[89]\\d{10}$',
+
+	// Version and development patterns
+	SEMVER:
+		'^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$',
+	JWT_TOKEN: '^[A-Za-z0-9-_]+\\.[A-Za-z0-9-_]+\\.[A-Za-z0-9-_.+/=]*$',
+	GIT_COMMIT: '^[a-f0-9]{7,40}$',
+
+	// Social media and platform patterns
+	GITHUB_USERNAME: '^[a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38}$',
+	TWITTER_HANDLE: '^@?(\\w){1,15}$',
+	DISCORD_ID: '^\\d{17,19}$',
+	SLACK_USER_ID: '^U[A-Z0-9]{8,10}$',
+	YOUTUBE_VIDEO_ID: '^[a-zA-Z0-9_-]{11}$',
+
+	// Cloud and infrastructure patterns
+	AWS_S3_BUCKET: '^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$',
+	DOCKER_IMAGE:
+		'^[a-z0-9]+(?:[._-][a-z0-9]+)*(?:\\/[a-z0-9]+(?:[._-][a-z0-9]+)*)*(?::[a-zA-Z0-9._-]+)?$',
+	K8S_RESOURCE_NAME: '^[a-z0-9]([-a-z0-9]*[a-z0-9])?$',
+	NPM_PACKAGE: '^(?:@[a-z0-9-*~][a-z0-9-*._~]*\\/)?[a-z0-9-~][a-z0-9-._~]*$',
+
+	// International phone (E.164)
+	E164_PHONE: '^\\+[1-9]\\d{1,14}$',
+
+	// Additional platform patterns
+	LINKEDIN_PROFILE:
+		'^https:\\/\\/(www\\.)?linkedin\\.com\\/in\\/[a-zA-Z0-9-]+\\/?$',
+	GOOGLE_DRIVE_ID: '^[a-zA-Z0-9-_]{25,}$',
+	FIREBASE_PROJECT_ID: '^[a-z0-9-]{6,30}$',
+	AZURE_RESOURCE_GROUP: '^[a-zA-Z0-9._()-]{1,90}$',
 } as const;
 
 // Human-readable pattern mappings

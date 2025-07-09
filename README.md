@@ -10,9 +10,9 @@
 ## ✨ Key Features
 
 - **🔗 Fluent & Chainable API**: Construct complex regex patterns with an intuitive, readable builder.
-- **🧠 Human Text Intelligence**: Convert natural language descriptions into regex patterns (`t2r`) or validation rules (`t2v`). Supports everything from simple keywords ("email") to sophisticated, multi-part requirements ("password with 2 uppercase, 2 numbers, and no common words").
-- **🛡️ Advanced Validation**: A comprehensive suite of validation tools for passwords, emails, and other data formats.
-- **📚 Rich Pattern Library**: Includes ready-to-use constants and builder methods for common types like emails, URLs, dates, JWTs, and more.
+- **🧠 Human Text Intelligence**: Convert natural language descriptions into regex patterns (`t2r`) or validation rules (`t2v`). The intelligent parser understands simple keywords ("email"), complex sequences ("starts with letters, then numbers"), and logical conditions ("jwt or uuid").
+- **🛡️ Advanced Validation**: A comprehensive suite of over 45 validation tools for passwords, emails, and dozens of modern data formats, including JWTs, cryptocurrency addresses, cloud resource identifiers, and international standards (IBAN, SemVer).
+- **📚 Rich Pattern Library**: Includes over 50 ready-to-use constants and builder methods for common types like `EMAIL`, `URL`, `DATE`, and advanced patterns for `JWT`, `SEMVER`, `MONGO_ID`, `BITCOIN_ADDRESS`, `DOCKER_IMAGE`, and more.
 - **🚀 TypeScript Native**: Built with TypeScript for full type safety, autocompletion, and a great developer experience.
 - **📦 Zero Dependencies**: Lightweight and self-contained.
 
@@ -58,17 +58,21 @@ _Aliases: `h2r`, `humanToRegex`, `textToRegex`, `parseHumanTextToRegex`_
 
 ### 3. Human Text to Validation (`t2v`)
 
-Similarly, `t2v` creates a set of validation rules from a description, which you can use to check inputs directly without writing regex.
+Similarly, `t2v` creates a set of validation rules from a description. It's perfect for validating forms and data without writing regex.
 
 ```typescript
 import { t2v } from 'rgex';
 
-const validation = t2v(
-	'required email with custom domain not gmail or yahoo',
-	'contact@my-company.com'
+// Simple validation
+const emailValidation = t2v('required email');
+
+// Advanced validation using the rich pattern library
+const apiTokenValidation = t2v(
+	'valid jwt token or git commit hash',
+	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.t-IDcSemACt8xhtWd80xX1cdO43a-G_jp49CV-inFpQ'
 );
 
-console.log(validation.allPassed); // true
+console.log(apiTokenValidation.allPassed); // true
 ```
 
 _Aliases: `h2v`, `humanToValidation`, `textToValidation`, `parseHumanTextToValidation`_
@@ -160,11 +164,11 @@ These can be imported and used directly without a `RGex` instance.
 
 Use these constants to access pre-built patterns and character sets directly.
 
-- **`REGEX_PATTERNS`**: An object containing ready-to-use regex patterns for `EMAIL`, `URL`, `UUID`, `JWT`, `IPV4`, `SEMVER`, etc.
+- **`REGEX_PATTERNS`**: An object containing over 50 ready-to-use regex patterns, including `EMAIL`, `URL`, `UUID`, `JWT`, `IPV4`, `SEMVER`, `CREDIT_CARD`, `MONGO_ID`, `BITCOIN_ADDRESS`, `DOCKER_IMAGE`, and more.
 - **`HUMAN_PATTERNS`**: Maps human-readable phrases to their corresponding regex patterns.
-- **`VALIDATION_PATTERNS`**: Patterns used internally by the validation engine.
+- **`VALIDATION_PATTERNS`**: A collection of over 45 validation rule factories for common data types.
 - **`PATTERN_KEYWORDS`**: Keywords used by `t2r` to identify pattern types.
-- **`VALIDATION_KEYWORDS`**: Keywords used by `t2v` to identify validation rules.
+- **`VALIDATION_KEYWORDS`**: A dictionary of over 100 keywords and aliases used by `t2v` to identify validation rules (e.g., 'ssn', 'social security', 'jwt').
 - **`COMMON_PASSWORDS`**: A `Set` containing thousands of common passwords.
 - **`SPECIAL_CHARS`**, **`SYMBOLS`**: Strings containing sets of special characters for password generation and validation.
 
@@ -196,3 +200,5 @@ Contributions are welcome! Whether it's a bug report, a new feature, or an impro
 ## 📜 License
 
 This project is licensed under the **MIT License**. See the [LICENSE](./LICENSE) file for details.
+
+> A project by [@duonguyen.site AKA codetails.site](https://codetails.site)

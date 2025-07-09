@@ -1,6 +1,6 @@
 {
 	"name": "rgex",
-	"version": "1.1.6-stable",
+	"version": "1.2.0-beta",
 	"description": "A powerful, chainable regex builder platform with comprehensive validation utilities",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
@@ -46,14 +46,14 @@
 	},
 	"scripts": {
 		"lint": "tsc --noEmit",
-		"test": "bun run test/index.test.ts",
-		"examples": "bun run examples/examples.ts",
-		"help": "bun run scripts/scripts.ts",
-		"build:js": "bun run scripts/build.ts",
-		"build:docs": "bun run scripts/build.ts docs",
-		"build": "bun run scripts/build.ts full",
-		"build:ci": "bun run scripts/build.ts ci",
-		"postinstall": "bun run scripts/postinstall.js",
+		"test": "bun run ./test/index.test.ts",
+		"examples": "bun run ./examples/examples.ts",
+		"help": "bun run ./scripts/scripts.ts",
+		"build:js": "bun run ./scripts/build.ts",
+		"build:docs": "bun run ./scripts/build.ts docs",
+		"build": "bun run ./scripts/build.ts full",
+		"build:ci": "bun run ./scripts/build.ts ci",
+		"postinstall": "node scripts/postinstall.js",
 		"clean": "rm -rf dist docs docs-md",
 		"prepare": "husky"
 	},
@@ -102,8 +102,7 @@
 		"*.{ts,tsx}": [
 			"echo 'Building, testing, and generating docs...'",
 			"bash -c 'bun run build'",
-			"bash -c 'bun test'",
-			"bash -c 'bun run build:docs'"
+			"bash -c 'bun test'"
 		]
 	}
 }

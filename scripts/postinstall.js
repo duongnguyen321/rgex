@@ -3,7 +3,12 @@
 /**
  * RGex Post-install Script
  * Shows thank you message and website link
+ * Designed to fail gracefully and not block installation
  */
+
+// Exit gracefully on any uncaught errors to prevent blocking installation
+process.on('uncaughtException', () => process.exit(0));
+process.on('unhandledRejection', () => process.exit(0));
 
 const colors = {
 	reset: '\x1b[0m',
@@ -25,7 +30,7 @@ ${colors.cyan}┌─────────────────────
 │  ██║  ██║╚██████╔╝███████╗██╔╝ ██╗                          │
 │  ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝                          │
 │                                                             │
-│             ${colors.yellow}A Powerful Regex Builder Platform${colors.cyan}              │
+│             ${colors.yellow}A Powerful Regex Builder Platform${colors.cyan}               │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘${colors.reset}
 `;
@@ -55,45 +60,51 @@ const regex = RGex.create()
 // Advanced password validation
 const validation = new RGex('myPassword123!').passwordCase();${colors.reset}
 
-${colors.bright}${colors.magenta}🌐 Learn More: ${colors.cyan}https://codetails.site${colors.reset}
+${colors.bright}${colors.magenta}🌐 Learn More: ${colors.cyan}https://duongnguyen321.github.io/rgex${colors.reset}
 
 ${colors.bright}Happy Coding! 🚀${colors.reset}
 `;
 
-// Only show message if not in CI environment
-if (!process.env.CI && !process.env.SILENT_INSTALL) {
-	console.log(logo);
-	console.log(message);
-}
-
-// Track installation (anonymous)
+// Main execution wrapped in try-catch for safety
 try {
-	// Optional: Add anonymous usage analytics here
-	// This is commented out by default for privacy
-	// const https = require('https');
-	// const postData = JSON.stringify({
-	//   event: 'install',
-	//   package: 'rgex',
-	//   version: require('../package.json').version,
-	//   timestamp: new Date().toISOString()
-	// });
-	// const req = https.request({
-	//   hostname: 'api.example.com',
-	//   port: 443,
-	//   path: '/analytics',
-	//   method: 'POST',
-	//   headers: {
-	//     'Content-Type': 'application/json',
-	//     'Content-Length': Buffer.byteLength(postData)
-	//   }
-	// }, (res) => {
-	//   // Silent analytics
-	// });
-	// req.on('error', () => {
-	//   // Silently ignore analytics errors
-	// });
-	// req.write(postData);
-	// req.end();
+	// Only show message if not in CI environment
+	if (!process.env.CI && !process.env.SILENT_INSTALL) {
+		console.log(logo);
+		console.log(message);
+	}
+
+	// Track installation (anonymous)
+	try {
+		// Optional: Add anonymous usage analytics here
+		// This is commented out by default for privacy
+		// const https = require('https');
+		// const postData = JSON.stringify({
+		//   event: 'install',
+		//   package: 'rgex',
+		//   version: require('../package.json').version,
+		//   timestamp: new Date().toISOString()
+		// });
+		// const req = https.request({
+		//   hostname: 'api.example.com',
+		//   port: 443,
+		//   path: '/analytics',
+		//   method: 'POST',
+		//   headers: {
+		//     'Content-Type': 'application/json',
+		//     'Content-Length': Buffer.byteLength(postData)
+		//   }
+		// }, (res) => {
+		//   // Silent analytics
+		// });
+		// req.on('error', () => {
+		//   // Silently ignore analytics errors
+		// });
+		// req.write(postData);
+		// req.end();
+	} catch (error) {
+		// Silently ignore any errors
+	}
 } catch (error) {
-	// Silently ignore any errors
+	// Silently ignore any errors and exit gracefully
+	process.exit(0);
 }

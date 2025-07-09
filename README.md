@@ -3,7 +3,7 @@
 [![NPM Version](https://img.shields.io/npm/v/rgex?style=flat-square&color=CB3837&logo=npm)](https://www.npmjs.com/package/rgex)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/duongnguyen321/rgex/ci.yml?branch=main&style=flat-square)](https://github.com/duongnguyen321/rgex/actions/workflows/ci.yml)
-[![License](https://img.shields.io/npm/l/rgex?style=flat-square&color=lightgrey)](./LICENSE)
+[![License](https://img.shields.io/npm/l/rgex?style=flat-square&color=lightgrey)](https://github.com/duongnguyen321/rgex/LICENSE)
 
 **RGex is a powerful, modern, and chainable regular expression builder for TypeScript and JavaScript.** It transforms cryptic regex syntax into a readable, fluent API. With features like human-text-to-regex parsing, advanced validation utilities, and a rich set of pre-built patterns, RGex simplifies even the most complex pattern-matching tasks.
 
@@ -191,7 +191,7 @@ RGex is fully typed for a superior developer experience.
 
 ## 📚 Official Documentation
 
-For a deep dive into every function, type, and constant, please see our **[Full API Documentation](https://duongnguyen321.github.io/rgex)**, which is automatically generated from the source code via [TypeDoc](https://typedoc.org/) and includes the **[Advanced T2R/T2V Patterns Guide](./T2R-T2V.md)**.
+For a deep dive into every function, type, and constant, please see our **[Full API Documentation](https://duongnguyen321.github.io/rgex)**, which is automatically generated from the source code via [TypeDoc](https://typedoc.org/) and includes the **[Advanced T2R/T2V Patterns Guide](https://github.com/duongnguyen321/rgex/T2R-T2V.md)**.
 
 ## 🤝 Contributing
 
@@ -199,6 +199,6 @@ Contributions are welcome! Whether it's a bug report, a new feature, or an impro
 
 ## 📜 License
 
-This project is licensed under the **MIT License**. See the [LICENSE](./LICENSE) file for details.
+This project is licensed under the **MIT License**. See the [LICENSE](https://github.com/duongnguyen321/rgex/LICENSE) file for details.
 
 > A project by [@duonguyen.site AKA codetails.site](https://codetails.site)
